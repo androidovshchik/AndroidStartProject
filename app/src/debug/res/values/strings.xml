@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="developer_email" translatable="false">vladkalyuzhnyu@gmail.com</string>
+
+    <!-- Test Ads -->
+    <string name="ads_banner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ads_interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ads_interstitial_video" translatable="false">ca-app-pub-3940256099942544/8691691433</string>
+
+    <string name="error_crash">An error occurred, please send a letter to the developer to solve the problem</string>
+    <string name="error_comment">You can also add a few words about what was happened</string>
+
+    <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">App tools</string>
+
+    <string name="hype_report_name">Sending logs</string>
+    <string name="hype_report_subtitle">Share the application logs in a convenient way</string>
+    <string name="hype_report_failed_get">Failed to get logs</string>
+    <string name="hype_report_logs">Logs</string>
+    <string name="hype_report_send">Send&#8230;</string>
+    <string name="hype_report_failed_send">Failed to send</string>
+
+    <string name="hp_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Restart</string>
+    <string name="hp_pheonix_options_title" tools:ignore="ExtraTranslation,PrivateResource">Restart app?</string>
+    <string name="hp_restart_activity" tools:ignore="ExtraTranslation,MissingTranslation,PrivateResource">&#8230;</string>
+
+    <string name="tmb_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Logs</string>
+    <string name="tmb_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">View recorded log messages</string>
+
+    <string name="hchuck_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">View REST application requests</string>
+</resources>

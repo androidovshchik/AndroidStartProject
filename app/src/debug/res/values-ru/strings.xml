@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="error_crash">Произошла ошибка, отправьте, пожалуйста, письмо разработчику для решения проблемы</string>
+    <string name="error_comment">И если не затруднит, добавьте пару слов о случившемся</string>
+
+    <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">Инструменты</string>
+    <string name="hype_notification_subtext" tools:ignore="ExtraTranslation,PrivateResource">Нажмите, чтобы открыть меню</string>
+
+    <string name="hype_report_name">Отправка логов</string>
+    <string name="hype_report_subtitle">Делитесь логами приложения удобным способом</string>
+    <string name="hype_report_failed_get">Не удалось получить логи</string>
+    <string name="hype_report_logs">Логи</string>
+    <string name="hype_report_send">Отправить&#8230;</string>
+    <string name="hype_report_failed_send">Не удалось отправить</string>
+
+    <string name="hd_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Файловый менеджер</string>
+    <string name="hd_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">Листайте, удаляйте или делитесь файлами приложения</string>
+    <string name="hd_up" tools:ignore="ExtraTranslation,PrivateResource">..</string>
+    <string name="hd_share" tools:ignore="ExtraTranslation,PrivateResource">Поделиться</string>
+    <string name="hd_delete" tools:ignore="ExtraTranslation,PrivateResource">Удалить</string>
+
+    <string name="hm_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Линейка</string>
+    <string name="hm_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">Измеряйте расстояния между виджетами и их размеры</string>
+
+    <string name="hsp_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Хранилище ключей</string>
+    <string name="hsp_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">Просмотривайте и редактируйте хранилище ключей</string>
+    <string name="hsp_preference_edit_text" tools:ignore="ExtraTranslation,PrivateResource">Значение</string>
+    <string name="hsp_preference_edit_action_apply" tools:ignore="ExtraTranslation,PrivateResource">Применить</string>
+
+    <string name="hp_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Рестарт</string>
+    <string name="hp_pheonix_options_title" tools:ignore="ExtraTranslation,PrivateResource">Перезапустить приложение?</string>
+    <string name="hp_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">Очищайте данные и перезапускайте приложение</string>
+    <string name="hp_clear_cache" tools:ignore="ExtraTranslation,PrivateResource">Очистить кэш</string>
+    <string name="hp_clear_data" tools:ignore="ExtraTranslation,PrivateResource">Очистить данные</string>
+    <string name="hp_dialog_confirmation" tools:ignore="ExtraTranslation,PrivateResource">Перезапустить</string>
+
+    <string name="tmb_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Логи</string>
+    <string name="tmb_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">Просматривайте журнальные сообщения</string>
+
+    <string name="hr_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Запись экрана</string>
+    <string name="hr_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">Записывайте, сохраняйте и делитесь видео с экрана</string>
+    <string name="hr_recordings" tools:ignore="ExtraTranslation,PrivateResource">Список видео</string>
+    <string name="hr_share" tools:ignore="ExtraTranslation,PrivateResource">Поделиться</string>
+    <string name="hr_record" tools:ignore="ExtraTranslation,PrivateResource">Запись</string>
+    <string name="hr_recording" tools:ignore="ExtraTranslation,PrivateResource">Идет запись</string>
+
+    <string name="ha_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Инспектор атрибутов</string>
+    <string name="ha_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">Просматривайте и настраивайте атрибуты виджетов</string>
+
+    <string name="hchuck_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Просматривайте REST запросы приложения</string>
+</resources>
