@@ -20,7 +20,7 @@ android {
     }
     signingConfigs {
         certificate {
-            storeFile file("keystore/certificate.jks")
+            storeFile file("keystore/debug.jks")
             storePassword "androidovshchik"
             keyAlias "androidovshchik"
             keyPassword "androidovshchik"
@@ -60,7 +60,7 @@ dependencies {
     implementation "com.google.android.material:material:$androidx_version"
     // implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'androidx.multidex:multidex:2.0.0'
-    implementation 'com.google.android.gms:play-services-base:15.0.1'
+    implementation 'com.google.android.gms:play-services-base:16.0.1'
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
