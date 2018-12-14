@@ -9,9 +9,9 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.os.PowerManager
-import io.androidovshchik.project.triggers.ToastTrigger
 import io.androidovshchik.project.extensions.context.newIntent
 import io.androidovshchik.project.extensions.context.newWakeLock
+import io.androidovshchik.project.triggers.ToastTrigger
 import io.reactivex.disposables.CompositeDisposable
 
 @SuppressLint("Registered")
