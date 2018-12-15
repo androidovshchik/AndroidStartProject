@@ -16,7 +16,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 @SuppressLint("Registered")
 @Suppress("MemberVisibilityCanBePrivate")
-open class BaseV7Activity : AppCompatActivity() {
+open class BaseActivity : AppCompatActivity() {
 
     protected val disposable = CompositeDisposable()
 
