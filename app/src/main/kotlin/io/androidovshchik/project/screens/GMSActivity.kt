@@ -4,13 +4,13 @@
 
 package io.androidovshchik.project.screens
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import io.androidovshchik.project.R
+import io.androidovshchik.project.extensions.clearTask
 import io.androidovshchik.project.extensions.context.startActionView
 import kotlinx.android.synthetic.main.activity_gms.*
 
@@ -32,9 +32,7 @@ class GMSActivity : AppCompatActivity() {
         super.onStart()
         if (GoogleApiAvailability.getInstance()
                 .isGooglePlayServicesAvailable(applicationContext) == ConnectionResult.SUCCESS) {
-            startActivity(packageManager.getLaunchIntentForPackage(packageName)!!.apply {
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            })
+            startActivity(packageManager.getLaunchIntentForPackage(packageName)!!.clearTask())
             finish()
         }
     }

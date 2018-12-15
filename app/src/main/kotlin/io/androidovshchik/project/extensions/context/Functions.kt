@@ -18,7 +18,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaScannerConnection
 import android.net.Uri
-import android.os.Build
 import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +25,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import io.androidovshchik.project.R
-import io.androidovshchik.project.extensions.toFileUri
+import io.androidovshchik.project.extensions.isMarshmallowPlus
+import io.androidovshchik.project.extensions.isOreoPlus
 import io.androidovshchik.project.triggers.ToastTrigger
 import timber.log.Timber
 
@@ -65,8 +65,9 @@ fun Context.startActionView(link: String): Boolean {
     }
 }
 
+@SuppressLint("NewApi")
 fun Context.startForegroundService(serviceClass: Class<out Service>) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    if (isOreoPlus()) {
         startForegroundService(newIntent(serviceClass))
     } else {
         startService(newIntent(serviceClass))
@@ -92,21 +93,14 @@ fun Context.stopService(serviceClass: Class<out Service>) {
 @SuppressLint("NewApi")
 fun Context.nextAlarm(interval: Int, receiverClass: Class<out BroadcastReceiver>) {
     cancelAlarm(receiverClass)
-    val sdkInt = Build.VERSION.SDK_INT
     when {
-        sdkInt >= Build.VERSION_CODES.M -> alarmManager().setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+        isMarshmallowPlus() -> alarmManager().setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
             SystemClock.elapsedRealtime() + interval, newPendingReceiver(receiverClass))
-        sdkInt >= android.os.Build.VERSION_CODES.KITKAT -> alarmManager().setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            SystemClock.elapsedRealtime() + interval, newPendingReceiver(receiverClass))
-        else -> alarmManager().set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+        else -> alarmManager().setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP,
             SystemClock.elapsedRealtime() + interval, newPendingReceiver(receiverClass))
     }
 }
 
 fun Context.scanFile(path: String) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        MediaScannerConnection.scanFile(applicationContext, arrayOf(path), null, null)
-    } else {
-        sendBroadcast(Intent(Intent.ACTION_MEDIA_MOUNTED, path.toFileUri()))
-    }
+    MediaScannerConnection.scanFile(applicationContext, arrayOf(path), null, null)
 }

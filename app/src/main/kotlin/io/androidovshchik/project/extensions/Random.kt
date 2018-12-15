@@ -6,11 +6,12 @@
 
 package io.androidovshchik.project.extensions
 
+import io.androidovshchik.project.CHARS
 import java.util.*
 
 fun Random.nextInt(range: IntRange): Int = range.start + nextInt(range.last - range.start + 1)
 
-fun Random.nextString(range: IntRange, chars: String): String {
+fun Random.nextString(range: IntRange, chars: String = CHARS): String {
     var output = ""
     val size = nextInt(range)
     for (i in 0 until size) {
