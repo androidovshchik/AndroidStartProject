@@ -15,7 +15,6 @@ class ToastTrigger : BroadcastReceiver() {
     companion object {
 
         const val EXTRA_MESSAGE = "message"
-
         const val EXTRA_DURATION = "duration"
     }
 

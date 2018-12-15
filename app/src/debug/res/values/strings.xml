@@ -3,15 +3,15 @@
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Debug version</string>
     <string name="developer_email" translatable="false">vladkalyuzhnyu@gmail.com</string>
+    <string name="error_crash">An error occurred, please send a letter to the developer to solve the problem</string>
+    <string name="error_comment">You can also add a few words about what was happened</string>
 
     <!-- Test Ads -->
     <string name="ads_banner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="ads_interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="ads_interstitial_video" translatable="false">ca-app-pub-3940256099942544/8691691433</string>
-
-    <string name="error_crash">An error occurred, please send a letter to the developer to solve the problem</string>
-    <string name="error_comment">You can also add a few words about what was happened</string>
 
     <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">App tools</string>
 
