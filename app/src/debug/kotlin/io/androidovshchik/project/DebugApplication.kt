@@ -8,6 +8,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.text.TextUtils
 import android.widget.Toast
+import com.facebook.stetho.Stetho
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItem
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItemHyperionPlugin
 import io.androidovshchik.project.base.BaseApplication
@@ -31,6 +32,7 @@ class DebugApplication : BaseApplication() {
             return
         }
         Timber.plant(DebugTree())
+        Stetho.initializeWithDefaults(applicationContext)
         ACRA.init(this, ConfigurationBuilder(this)
             .setMailTo(getString(R.string.developer_email))
             .setReportingInteractionMode(ReportingInteractionMode.DIALOG)
