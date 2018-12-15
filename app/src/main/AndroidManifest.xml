@@ -36,6 +36,7 @@
         <activity
             android:name=".screens.GMSActivity"
             android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"></activity>
         <receiver
             android:name=".triggers.RebootTrigger"

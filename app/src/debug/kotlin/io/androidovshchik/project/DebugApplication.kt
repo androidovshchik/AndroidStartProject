@@ -40,9 +40,10 @@ class DebugApplication : BaseApplication() {
         Timber.plant(DebugTree())
         Timber.d("*** DEVICE INFO ***")
         Timber.d("SDK_INT: ${Build.VERSION.SDK_INT}")
-        Timber.d("ARCH: ${System.getProperty("os.arch")}")
+        Timber.d("OS_ARCH: ${System.getProperty("os.arch")}")
         if (isLollipopPlus()) {
-            Timber.d("ABIS: ${Build.SUPPORTED_ABIS.asList()}")
+            Timber.d("SUPPORTED_32_BIT_ABIS: ${Build.SUPPORTED_32_BIT_ABIS.asList()}")
+            Timber.d("SUPPORTED_64_BIT_ABIS: ${Build.SUPPORTED_64_BIT_ABIS.asList()}")
         } else {
             Timber.d("ABI: ${Build.CPU_ABI}")
             Timber.d("ABI2: ${Build.CPU_ABI2}")
@@ -51,6 +52,7 @@ class DebugApplication : BaseApplication() {
         Timber.d("BRAND: ${Build.BRAND}")
         Timber.d("MODEL: ${Build.MODEL}")
         Timber.d("DEVICE: ${Build.DEVICE}")
+        Timber.d("PRODUCT: ${Build.PRODUCT}")
         Timber.d("*******************")
         Stetho.initializeWithDefaults(applicationContext)
         ACRA.init(this, CoreConfigurationBuilder(applicationContext)

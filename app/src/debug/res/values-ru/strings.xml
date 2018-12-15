@@ -3,7 +3,6 @@
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">Отладочная версия</string>
     <string name="crash_subject">Отчет об ошибке</string>
     <string name="crash_title">Произошла ошибка</string>
     <string name="crash_text">Отправьте, пожалуйста, письмо разработчику для решения проблемы</string>

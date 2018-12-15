@@ -6,10 +6,20 @@
 
 package io.androidovshchik.project.extensions
 
+import android.text.Html
 import android.text.InputFilter
 import android.text.InputType
 import android.text.method.DigitsKeyListener
 import android.widget.EditText
+
+@Suppress("DEPRECATION")
+fun EditText.setHtml(html: String) {
+    if (isNougatPlus()) {
+        setText(Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY))
+    } else {
+        setText(Html.fromHtml(html))
+    }
+}
 
 fun EditText.maxLength(maxLength: Int) {
     val array = arrayOfNulls<InputFilter>(1)

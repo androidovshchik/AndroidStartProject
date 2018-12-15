@@ -2,6 +2,7 @@
   ~ Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
   -->
 
+<!--suppress CheckTagEmptyBody -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="io.androidovshchik.project">
@@ -10,6 +11,11 @@
         android:name=".DebugApplication"
         tools:replace="android:name"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".screens.FAQActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"></activity>
     </application>
 
 </manifest>
