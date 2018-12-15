@@ -6,9 +6,9 @@ package io.androidovshchik.project.screens
 
 import android.os.Bundle
 import io.androidovshchik.project.R
-import io.androidovshchik.project.base.BaseV7Activity
+import io.androidovshchik.project.base.BaseActivity
 
-class MainActivity : BaseV7Activity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
