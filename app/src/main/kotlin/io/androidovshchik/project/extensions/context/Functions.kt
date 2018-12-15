@@ -6,7 +6,6 @@
 
 package io.androidovshchik.project.extensions.context
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -65,7 +64,6 @@ fun Context.startActionView(link: String): Boolean {
     }
 }
 
-@SuppressLint("NewApi")
 fun Context.startForegroundService(serviceClass: Class<out Service>) {
     if (isOreoPlus()) {
         startForegroundService(newIntent(serviceClass))
@@ -90,7 +88,6 @@ fun Context.stopService(serviceClass: Class<out Service>) {
     }
 }
 
-@SuppressLint("NewApi")
 fun Context.nextAlarm(interval: Int, receiverClass: Class<out BroadcastReceiver>) {
     cancelAlarm(receiverClass)
     when {

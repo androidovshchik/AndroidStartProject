@@ -6,12 +6,15 @@ package io.androidovshchik.project
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import com.facebook.stetho.Stetho
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItem
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItemHyperionPlugin
 import io.androidovshchik.project.base.BaseApplication
 import io.androidovshchik.project.extensions.context.createChooser
 import io.androidovshchik.project.extensions.context.toastShort
+import io.androidovshchik.project.extensions.isLollipopPlus
+import io.androidovshchik.project.extensions.newTask
 import io.androidovshchik.project.utils.DebugTree
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,12 +31,27 @@ import java.io.BufferedReader
 @Suppress("unused")
 class DebugApplication : BaseApplication() {
 
+    @Suppress("DEPRECATION")
     override fun onCreate() {
         super.onCreate()
         if (!isMainProcess()) {
             return
         }
         Timber.plant(DebugTree())
+        Timber.d("*** DEVICE INFO ***")
+        Timber.d("SDK_INT: ${Build.VERSION.SDK_INT}")
+        Timber.d("ARCH: ${System.getProperty("os.arch")}")
+        if (isLollipopPlus()) {
+            Timber.d("ABIS: ${Build.SUPPORTED_ABIS.asList()}")
+        } else {
+            Timber.d("ABI: ${Build.CPU_ABI}")
+            Timber.d("ABI2: ${Build.CPU_ABI2}")
+        }
+        Timber.d("MANUFACTURER: ${Build.MANUFACTURER}")
+        Timber.d("BRAND: ${Build.BRAND}")
+        Timber.d("MODEL: ${Build.MODEL}")
+        Timber.d("DEVICE: ${Build.DEVICE}")
+        Timber.d("*******************")
         Stetho.initializeWithDefaults(applicationContext)
         ACRA.init(this, CoreConfigurationBuilder(applicationContext)
             .setBuildConfigClass(BuildConfig::class.java)
@@ -69,9 +87,7 @@ class DebugApplication : BaseApplication() {
                             putExtra(Intent.EXTRA_SUBJECT, getString(R.string.hype_report_logs))
                             putExtra(Intent.EXTRA_TEXT, process.inputStream.bufferedReader()
                                 .use(BufferedReader::readText))
-                        }).apply {
-                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        })
+                        }).newTask())
                     }
                 } catch (e: Exception) {
                     Timber.e(e)

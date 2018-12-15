@@ -6,7 +6,6 @@
 
 package io.androidovshchik.project.extensions
 
-import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -14,7 +13,6 @@ import android.graphics.Color
 import io.androidovshchik.project.NOISY_CHANNEL_ID
 import io.androidovshchik.project.QUITE_CHANNEL_ID
 
-@SuppressLint("NewApi")
 fun NotificationManager.createSilentChannel() {
     if (isOreoPlus()) {
         val channel = NotificationChannel(QUITE_CHANNEL_ID, QUITE_CHANNEL_ID, NotificationManager.IMPORTANCE_LOW)
@@ -23,7 +21,6 @@ fun NotificationManager.createSilentChannel() {
     }
 }
 
-@SuppressLint("NewApi")
 fun NotificationManager.createNoisyChannel() {
     if (isOreoPlus()) {
         val channel = NotificationChannel(NOISY_CHANNEL_ID, NOISY_CHANNEL_ID, NotificationManager.IMPORTANCE_HIGH)
