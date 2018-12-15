@@ -4,7 +4,7 @@
 
 <resources>
 
-    <style name="CrashDialogTheme" parent="Theme.AppCompat.Dialog">
+    <style name="DialogTheme.Crash" parent="Theme.AppCompat.Dialog">
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/textLightPrimary</item>
     </style>

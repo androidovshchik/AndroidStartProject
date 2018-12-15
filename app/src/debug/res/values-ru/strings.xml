@@ -13,11 +13,11 @@
     <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">Инструменты</string>
     <string name="hype_notification_subtext" tools:ignore="ExtraTranslation,PrivateResource">Нажмите, чтобы открыть меню</string>
 
-    <string name="hype_report_name">Отправка логов</string>
+    <string name="hype_report_title">Отправка логов</string>
     <string name="hype_report_subtitle">Делитесь логами приложения удобным способом</string>
-    <string name="hype_report_failed_get">Не удалось получить логи</string>
     <string name="hype_report_logs">Логи</string>
     <string name="hype_report_send">Отправить&#8230;</string>
+    <string name="hype_report_failed_get">Не удалось получить логи</string>
     <string name="hype_report_failed_send">Не удалось отправить</string>
 
     <string name="hd_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Файловый менеджер</string>

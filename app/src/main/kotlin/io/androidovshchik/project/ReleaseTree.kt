@@ -11,11 +11,6 @@ import timber.log.Timber
 
 class ReleaseTree : Timber.DebugTree() {
 
-    companion object {
-
-        private const val MAX_LOG_LENGTH = 4000
-    }
-
     override fun createStackElementTag(element: StackTraceElement): String {
         return "${super.createStackElementTag(element)}:${element.methodName}:${element.lineNumber}"
     }
@@ -35,7 +30,6 @@ class ReleaseTree : Timber.DebugTree() {
             } else {
                 Log.println(priority, tag, message)
             }
-            Log.println(priority, tag, message)
             return
         }
         var i = 0
@@ -57,5 +51,10 @@ class ReleaseTree : Timber.DebugTree() {
             } while (i < maxI)
             i++
         }
+    }
+
+    companion object {
+
+        private const val MAX_LOG_LENGTH = 4000
     }
 }
