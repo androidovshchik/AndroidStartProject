@@ -9,9 +9,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.os.PowerManager
-import io.androidovshchik.project.extensions.context.newIntent
 import io.androidovshchik.project.extensions.context.newWakeLock
-import io.androidovshchik.project.triggers.ToastTrigger
 
 @SuppressLint("Registered")
 @Suppress("MemberVisibilityCanBePrivate", "unused")
@@ -30,12 +28,6 @@ open class BaseService : Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         return Service.START_NOT_STICKY
-    }
-
-    protected fun showToast(message: String) {
-        sendBroadcast(newIntent(ToastTrigger::class.java).apply {
-            putExtra(ToastTrigger.EXTRA_MESSAGE, message)
-        })
     }
 
     protected fun stopWork() {

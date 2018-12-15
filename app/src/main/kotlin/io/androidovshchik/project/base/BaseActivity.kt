@@ -12,10 +12,13 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import io.androidovshchik.project.extensions.context.newIntent
 import io.androidovshchik.project.screens.GMSActivity
+import io.androidovshchik.project.utils.CompositeJob
 
 @SuppressLint("Registered")
 @Suppress("MemberVisibilityCanBePrivate")
 open class BaseActivity : AppCompatActivity() {
+
+    protected val job = CompositeJob()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,11 @@ open class BaseActivity : AppCompatActivity() {
             startActivity(newIntent(GMSActivity::class.java))
             finish()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancelAll()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

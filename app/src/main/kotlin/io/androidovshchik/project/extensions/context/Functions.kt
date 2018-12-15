@@ -27,6 +27,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import io.androidovshchik.project.R
 import io.androidovshchik.project.extensions.toFileUri
+import io.androidovshchik.project.triggers.ToastTrigger
 import timber.log.Timber
 
 fun Context.allAppPermissions(): Array<String> = packageManager.getPackageInfo(packageName,
@@ -42,9 +43,15 @@ fun Context.newPendingReceiver(receiverClass: Class<out BroadcastReceiver>): Pen
 
 fun Context.newPendingReceiver(action: String): PendingIntent = PendingIntent.getBroadcast(applicationContext, 0, Intent(action), PendingIntent.FLAG_UPDATE_CURRENT)
 
-fun Context.toastShort(text: String) = Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
+fun Context.toastShort(message: String) = sendBroadcast(newIntent(ToastTrigger::class.java).apply {
+    putExtra(ToastTrigger.EXTRA_MESSAGE, message)
+    putExtra(ToastTrigger.EXTRA_DURATION, Toast.LENGTH_SHORT)
+})
 
-fun Context.toastLong(text: String) = Toast.makeText(applicationContext, text, Toast.LENGTH_LONG).show()
+fun Context.toastLong(message: String) = sendBroadcast(newIntent(ToastTrigger::class.java).apply {
+    putExtra(ToastTrigger.EXTRA_MESSAGE, message)
+    putExtra(ToastTrigger.EXTRA_DURATION, Toast.LENGTH_LONG)
+})
 
 fun Context.createChooser(intent: Intent): Intent = Intent.createChooser(intent, getString(R.string.choose_app))
 

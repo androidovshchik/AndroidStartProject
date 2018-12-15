@@ -18,9 +18,8 @@
     <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">App tools</string>
 
     <string name="hype_report_title">Sending logs</string>
-    <string name="hype_report_subtitle">Share the app logs in a convenient way</string>
-    <string name="hype_report_logs">Logs</string>
-    <string name="hype_report_failed_get">Failed to get logs</string>
+    <string name="hype_report_subtitle">Share the app logs</string>
+    <string name="hype_report_logs">App logs</string>
 
     <string name="hp_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Restart</string>
     <string name="hp_pheonix_options_title" tools:ignore="ExtraTranslation,PrivateResource">Restart app?</string>

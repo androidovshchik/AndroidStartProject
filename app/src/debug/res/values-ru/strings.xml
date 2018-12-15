@@ -14,9 +14,8 @@
     <string name="hype_notification_subtext" tools:ignore="ExtraTranslation,PrivateResource">Нажмите, чтобы открыть меню</string>
 
     <string name="hype_report_title">Отправка логов</string>
-    <string name="hype_report_subtitle">Делитесь логами приложения удобным способом</string>
-    <string name="hype_report_logs">Логи</string>
-    <string name="hype_report_failed_get">Не удалось получить логи</string>
+    <string name="hype_report_subtitle">Делитесь логами приложения</string>
+    <string name="hype_report_logs">Логи приложения</string>
 
     <string name="hd_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Файловый менеджер</string>
     <string name="hd_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">Листайте, удаляйте или делитесь файлами приложения</string>
