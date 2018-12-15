@@ -16,9 +16,10 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.acra.ACRA
-import org.acra.ReportField
-import org.acra.ReportingInteractionMode
-import org.acra.config.ConfigurationBuilder
+import org.acra.config.CoreConfigurationBuilder
+import org.acra.config.DialogConfigurationBuilder
+import org.acra.config.MailSenderConfigurationBuilder
+import org.acra.data.StringFormat
 import timber.log.Timber
 import java.io.BufferedReader
 
@@ -33,25 +34,22 @@ class DebugApplication : BaseApplication() {
         }
         Timber.plant(DebugTree())
         Stetho.initializeWithDefaults(applicationContext)
-        ACRA.init(this, ConfigurationBuilder(this)
+        val acraBuilder = CoreConfigurationBuilder(applicationContext)
+        acraBuilder.setBuildConfigClass(BuildConfig::class.java)
+            .setReportFormat(StringFormat.KEY_VALUE_LIST)
+        acraBuilder.getPluginConfigurationBuilder(MailSenderConfigurationBuilder::class.java)
             .setMailTo(getString(R.string.developer_email))
-            .setReportingInteractionMode(ReportingInteractionMode.DIALOG)
-            .setResDialogTheme(R.style.DialogTheme_Support)
-            .setResDialogText(R.string.error_crash)
-            .setResDialogCommentPrompt(R.string.error_comment)
-            .setCustomReportContent(
-                ReportField.APP_VERSION_CODE,
-                ReportField.APP_VERSION_NAME,
-                ReportField.ANDROID_VERSION,
-                ReportField.BRAND,
-                ReportField.PHONE_MODEL,
-                ReportField.PRODUCT,
-                ReportField.USER_COMMENT,
-                ReportField.USER_APP_START_DATE,
-                ReportField.USER_CRASH_DATE,
-                ReportField.STACK_TRACE,
-                ReportField.LOGCAT
-            ))
+            .setReportFileName("logs.txt")
+            .setReportAsFile(true)
+            .setEnabled(true)
+        acraBuilder.getPluginConfigurationBuilder(DialogConfigurationBuilder::class.java)
+            .setResTheme(R.style.CrashDialogTheme)
+            .setResTitle(R.string.error_title)
+            .setResText(R.string.error_text)
+            .setResCommentPrompt(R.string.error_comment)
+            .setResEmailPrompt(R.string.error_email)
+            .setEnabled(true)
+        ACRA.init(this, acraBuilder)
         SimpleItemHyperionPlugin.addItem(SimpleItem.Builder(getString(R.string.hype_report_name))
             .text(getString(R.string.hype_report_subtitle))
             .image(R.drawable.ic_send_grey_500_24dp)
