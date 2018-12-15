@@ -6,22 +6,18 @@ package io.androidovshchik.project
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.text.TextUtils
 import android.widget.Toast
 import com.facebook.stetho.Stetho
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItem
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItemHyperionPlugin
 import io.androidovshchik.project.base.BaseApplication
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.androidovshchik.project.extensions.context.createChooser
 import org.acra.ACRA
 import org.acra.config.CoreConfigurationBuilder
 import org.acra.config.DialogConfigurationBuilder
 import org.acra.config.MailSenderConfigurationBuilder
 import org.acra.data.StringFormat
 import timber.log.Timber
-import java.io.BufferedReader
 
 @SuppressLint("Registered")
 @Suppress("unused")
@@ -40,16 +36,16 @@ class DebugApplication : BaseApplication() {
             .setEnabled(true).apply {
                 getPluginConfigurationBuilder(MailSenderConfigurationBuilder::class.java)
                     .setMailTo(getString(R.string.developer_email))
-                    .setResSubject(R.string.acra_error_subject)
+                    .setResSubject(R.string.crash_subject)
                     .setReportFileName("logs.txt")
                     .setReportAsFile(true)
                     .setEnabled(true)
                 getPluginConfigurationBuilder(DialogConfigurationBuilder::class.java)
                     .setResTheme(R.style.DialogTheme_Crash)
-                    .setResTitle(R.string.acra_error_title)
-                    .setResText(R.string.acra_error_text)
-                    .setResCommentPrompt(R.string.acra_error_comment)
-                    .setResEmailPrompt(R.string.acra_error_email)
+                    .setResTitle(R.string.crash_title)
+                    .setResText(R.string.crash_text)
+                    .setResCommentPrompt(R.string.crash_comment)
+                    .setResEmailPrompt(R.string.crash_email)
                     .setEnabled(true)
             })
         SimpleItemHyperionPlugin.addItem(SimpleItem.Builder()
@@ -59,45 +55,17 @@ class DebugApplication : BaseApplication() {
             .clickListener {
                 Toast.makeText(applicationContext, getString(R.string.wait),
                     Toast.LENGTH_SHORT).show()
-                Observable.fromCallable {
-                    val appLogs = try {
-                        val process = Runtime.getRuntime().exec("logcat -d")
-                        process.inputStream.bufferedReader().use(BufferedReader::readText)
-                    } catch (e: Exception) {
-                        Timber.e(e)
-                        e.toString()
-                    }
-                    appLogs
-                }.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { result: String ->
-                        if (!TextUtils.isEmpty(result)) {
-                            sendEmail(result)
-                        } else {
-                            Toast.makeText(applicationContext, getString(R.string.hype_report_failed_get),
-                                Toast.LENGTH_SHORT).show()
-                        }
-                    }
+                createChooser(Intent(Intent.ACTION_SEND).apply {
+                    type = "message/rfc822"
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.developer_email)))
+                    putExtra(Intent.EXTRA_SUBJECT, getString(R.string.hype_report_logs))
+                    putExtra(Intent.EXTRA_TEXT, "")
+                })
             }
             .build())
     }
 
     override fun isMainProcess(): Boolean {
         return !ACRA.isACRASenderServiceProcess()
-    }
-
-    private fun sendEmail(text: String) {
-        try {
-            startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
-                type = "message/rfc822"
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.developer_email)))
-                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.hype_report_logs))
-                putExtra(Intent.EXTRA_TEXT, text)
-            }, getString(R.string.hype_report_send)))
-        } catch (e: Exception) {
-            Timber.e(e)
-            Toast.makeText(applicationContext, getString(R.string.hype_report_failed_send),
-                Toast.LENGTH_SHORT).show()
-        }
     }
 }

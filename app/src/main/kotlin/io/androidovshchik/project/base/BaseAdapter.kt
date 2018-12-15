@@ -4,12 +4,7 @@
 
 package io.androidovshchik.project.base
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
-import io.androidovshchik.project.extensions.appContext
 
 @Suppress("UNUSED_PARAMETER")
 abstract class BaseAdapter<M : BaseModel> : RecyclerView.Adapter<BaseViewHolder<M>>() {
@@ -24,8 +19,4 @@ abstract class BaseAdapter<M : BaseModel> : RecyclerView.Adapter<BaseViewHolder<
     }
 
     override fun getItemCount() = items.size
-
-    @Suppress("unused")
-    protected fun inflateView(@LayoutRes layout: Int, parent: ViewGroup): View =
-        LayoutInflater.from(parent.appContext()).inflate(layout, parent, false)
 }

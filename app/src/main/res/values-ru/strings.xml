@@ -2,8 +2,9 @@
   ~ Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="wait">Пожалуйста, подождите&#8230;</string>
+    <string name="choose_app">Выберите приложение</string>
     <string name="title_gms">Требуется обновление</string>
     <string name="old_gms_version">Устаревшая версия сервисов Google Play</string>
     <string name="update_gms">Обновить в Google Play</string>

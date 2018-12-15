@@ -2,13 +2,13 @@
   ~ Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">Отладочная версия</string>
-    <string name="acra_error_subject">Отчет об ошибке</string>
-    <string name="acra_error_title">Произошла ошибка</string>
-    <string name="acra_error_text">Отправьте, пожалуйста, письмо разработчику для решения проблемы</string>
-    <string name="acra_error_email">Ваш e-mail для обратной связи</string>
-    <string name="acra_error_comment">Напишите пару слов о случившемся</string>
+    <string name="crash_subject">Отчет об ошибке</string>
+    <string name="crash_title">Произошла ошибка</string>
+    <string name="crash_text">Отправьте, пожалуйста, письмо разработчику для решения проблемы</string>
+    <string name="crash_email">Ваш e-mail для обратной связи</string>
+    <string name="crash_comment">Напишите пару слов о случившемся</string>
 
     <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">Инструменты</string>
     <string name="hype_notification_subtext" tools:ignore="ExtraTranslation,PrivateResource">Нажмите, чтобы открыть меню</string>
@@ -16,9 +16,7 @@
     <string name="hype_report_title">Отправка логов</string>
     <string name="hype_report_subtitle">Делитесь логами приложения удобным способом</string>
     <string name="hype_report_logs">Логи</string>
-    <string name="hype_report_send">Отправить&#8230;</string>
     <string name="hype_report_failed_get">Не удалось получить логи</string>
-    <string name="hype_report_failed_send">Не удалось отправить</string>
 
     <string name="hd_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Файловый менеджер</string>
     <string name="hd_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">Листайте, удаляйте или делитесь файлами приложения</string>

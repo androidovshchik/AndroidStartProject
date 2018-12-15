@@ -2,14 +2,14 @@
   ~ Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">Debug version</string>
     <string name="developer_email" translatable="false">vladkalyuzhnyu@gmail.com</string>
-    <string name="acra_error_subject">Crash report</string>
-    <string name="acra_error_title">An error has occurred</string>
-    <string name="acra_error_text">Please send a letter to the developer to solve the problem</string>
-    <string name="acra_error_email">Your e-mail for feedback</string>
-    <string name="acra_error_comment">Write a few words about what happened</string>
+    <string name="crash_subject">Crash report</string>
+    <string name="crash_title">An error has occurred</string>
+    <string name="crash_text">Please send a letter to the developer to solve the problem</string>
+    <string name="crash_email">Your e-mail for feedback</string>
+    <string name="crash_comment">Write a few words about what happened</string>
 
     <string name="ads_banner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="ads_interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
@@ -18,11 +18,9 @@
     <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">App tools</string>
 
     <string name="hype_report_title">Sending logs</string>
-    <string name="hype_report_subtitle">Share the application logs in a convenient way</string>
+    <string name="hype_report_subtitle">Share the app logs in a convenient way</string>
     <string name="hype_report_logs">Logs</string>
-    <string name="hype_report_send">Send&#8230;</string>
     <string name="hype_report_failed_get">Failed to get logs</string>
-    <string name="hype_report_failed_send">Failed to send</string>
 
     <string name="hp_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Restart</string>
     <string name="hp_pheonix_options_title" tools:ignore="ExtraTranslation,PrivateResource">Restart app?</string>

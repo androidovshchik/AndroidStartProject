@@ -6,6 +6,7 @@
     <string name="app_name">Project</string>
 
     <string name="wait">Please, wait&#8230;</string>
+    <string name="choose_app">Choose app</string>
     <string name="title_gms">Update required</string>
     <string name="old_gms_version">Outdated version of Google Play Services</string>
     <string name="update_gms">Update on Google Play</string>

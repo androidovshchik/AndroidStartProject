@@ -20,12 +20,19 @@ import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.SystemClock
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.LayoutRes
+import io.androidovshchik.project.R
 import io.androidovshchik.project.extensions.toFileUri
 import timber.log.Timber
 
 fun Context.allAppPermissions(): Array<String> = packageManager.getPackageInfo(packageName,
     PackageManager.GET_PERMISSIONS).requestedPermissions ?: arrayOf()
+
+fun Context.inflateView(@LayoutRes layout: Int, parent: ViewGroup?): View = LayoutInflater.from(applicationContext).inflate(layout, parent, false)
 
 fun Context.newIntent(anyClass: Class<out Any>): Intent = Intent(applicationContext, anyClass)
 
@@ -38,6 +45,8 @@ fun Context.newPendingReceiver(action: String): PendingIntent = PendingIntent.ge
 fun Context.toastShort(text: String) = Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
 
 fun Context.toastLong(text: String) = Toast.makeText(applicationContext, text, Toast.LENGTH_LONG).show()
+
+fun Context.createChooser(intent: Intent): Intent = Intent.createChooser(intent, getString(R.string.choose_app))
 
 fun Context.startActionView(link: String): Boolean {
     return try {
