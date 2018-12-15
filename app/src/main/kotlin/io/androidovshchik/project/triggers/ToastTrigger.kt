@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
-import timber.log.Timber
 
 class ToastTrigger : BroadcastReceiver() {
 
@@ -19,7 +18,6 @@ class ToastTrigger : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        Timber.d("Toast triggered")
         if (intent.hasExtra(EXTRA_MESSAGE)) {
             val duration = intent.getIntExtra(EXTRA_DURATION, Toast.LENGTH_SHORT)
             Toast.makeText(context, intent.getStringExtra(EXTRA_MESSAGE), duration)

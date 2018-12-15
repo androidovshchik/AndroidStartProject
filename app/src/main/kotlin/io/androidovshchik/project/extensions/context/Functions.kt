@@ -33,7 +33,7 @@ import timber.log.Timber
 fun Context.allAppPermissions(): Array<String> = packageManager.getPackageInfo(packageName,
     PackageManager.GET_PERMISSIONS).requestedPermissions ?: arrayOf()
 
-fun Context.inflateView(@LayoutRes layout: Int, parent: ViewGroup?): View = LayoutInflater.from(applicationContext).inflate(layout, parent, false)
+fun Context.inflateView(@LayoutRes layout: Int, parent: ViewGroup? = null): View = LayoutInflater.from(applicationContext).inflate(layout, parent, false)
 
 fun Context.newIntent(anyClass: Class<out Any>): Intent = Intent(applicationContext, anyClass)
 

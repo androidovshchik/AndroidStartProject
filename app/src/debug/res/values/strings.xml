@@ -15,7 +15,7 @@
     <string name="ads_interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
     <string name="ads_interstitial_video" translatable="false">ca-app-pub-3940256099942544/8691691433</string>
 
-    <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">App tools</string>
+    <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">Debugging tools</string>
 
     <string name="hype_report_title">Sending logs</string>
     <string name="hype_report_subtitle">Share the app logs</string>

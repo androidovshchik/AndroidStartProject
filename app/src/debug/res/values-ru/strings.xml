@@ -10,7 +10,7 @@
     <string name="crash_email">Ваш e-mail для обратной связи</string>
     <string name="crash_comment">Напишите пару слов о случившемся</string>
 
-    <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">Инструменты</string>
+    <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">Инструменты для отладки</string>
     <string name="hype_notification_subtext" tools:ignore="ExtraTranslation,PrivateResource">Нажмите, чтобы открыть меню</string>
 
     <string name="hype_report_title">Отправка логов</string>

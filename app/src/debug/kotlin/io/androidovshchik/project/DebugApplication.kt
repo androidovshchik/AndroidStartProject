@@ -6,18 +6,23 @@ package io.androidovshchik.project
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.widget.Toast
 import com.facebook.stetho.Stetho
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItem
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItemHyperionPlugin
 import io.androidovshchik.project.base.BaseApplication
 import io.androidovshchik.project.extensions.context.createChooser
+import io.androidovshchik.project.extensions.context.toastShort
+import io.androidovshchik.project.utils.DebugTree
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.acra.ACRA
 import org.acra.config.CoreConfigurationBuilder
 import org.acra.config.DialogConfigurationBuilder
 import org.acra.config.MailSenderConfigurationBuilder
 import org.acra.data.StringFormat
 import timber.log.Timber
+import java.io.BufferedReader
 
 @SuppressLint("Registered")
 @Suppress("unused")
@@ -53,14 +58,25 @@ class DebugApplication : BaseApplication() {
             .text(getString(R.string.hype_report_subtitle))
             .image(R.drawable.ic_send_grey_500_24dp)
             .clickListener {
-                Toast.makeText(applicationContext, getString(R.string.wait),
-                    Toast.LENGTH_SHORT).show()
-                createChooser(Intent(Intent.ACTION_SEND).apply {
-                    type = "message/rfc822"
-                    putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.developer_email)))
-                    putExtra(Intent.EXTRA_SUBJECT, getString(R.string.hype_report_logs))
-                    putExtra(Intent.EXTRA_TEXT, "")
-                })
+                toastShort(getString(R.string.wait))
+                try {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val process = Runtime.getRuntime()
+                            .exec("logcat -d")
+                        startActivity(createChooser(Intent(Intent.ACTION_SEND).apply {
+                            type = "message/rfc822"
+                            putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.developer_email)))
+                            putExtra(Intent.EXTRA_SUBJECT, getString(R.string.hype_report_logs))
+                            putExtra(Intent.EXTRA_TEXT, process.inputStream.bufferedReader()
+                                .use(BufferedReader::readText))
+                        }).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        })
+                    }
+                } catch (e: Exception) {
+                    Timber.e(e)
+                    toastShort("${e.message}")
+                }
             }
             .build())
     }
