@@ -2,7 +2,7 @@
  * Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-package io.androidovshchik.project.gui
+package io.androidovshchik.project.screens
 
 import android.content.Intent
 import android.os.Bundle

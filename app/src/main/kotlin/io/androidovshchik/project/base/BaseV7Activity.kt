@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import io.androidovshchik.project.extensions.context.newIntent
-import io.androidovshchik.project.gui.GMSActivity
+import io.androidovshchik.project.screens.GMSActivity
 import io.reactivex.disposables.CompositeDisposable
 
 @SuppressLint("Registered")

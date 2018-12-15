@@ -21,7 +21,7 @@
         android:allowBackup="false"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".gui.MainActivity"
+            android:name=".screens.MainActivity"
             android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize">
             <intent-filter>
@@ -30,7 +30,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".gui.GMSActivity"
+            android:name=".screens.RetrofitActivity"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"></activity>
+        <activity
+            android:name=".screens.GMSActivity"
             android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"></activity>
         <receiver

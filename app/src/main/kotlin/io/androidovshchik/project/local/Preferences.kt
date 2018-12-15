@@ -2,7 +2,7 @@
  * Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-package io.androidovshchik.project.data
+package io.androidovshchik.project.local
 
 import com.marcinmoskala.kotlinpreferences.PreferenceHolder
 
