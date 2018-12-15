@@ -15,7 +15,6 @@ import android.os.PowerManager
 import android.telephony.TelephonyManager
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import com.gun0912.tedpermission.TedPermission
 import io.androidovshchik.project.extensions.*
 
 fun Context.activityManager(): ActivityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
@@ -37,12 +36,6 @@ fun Context.windowManager(): WindowManager = getSystemService(Context.WINDOW_SER
 fun Context.powerManager(): PowerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
 
 fun Context.isServiceRunning(serviceClass: Class<out Service>): Boolean = activityManager().isServiceRunning(serviceClass)
-
-fun Context.isDenied(permission: String): Boolean = TedPermission.isDenied(applicationContext, permission)
-
-fun Context.isGranted(permission: String): Boolean = areGranted(permission)
-
-fun Context.areGranted(vararg permissions: String): Boolean = TedPermission.isGranted(applicationContext, *permissions)
 
 fun Context.createSilentChannel() = notificationManager().createSilentChannel()
 

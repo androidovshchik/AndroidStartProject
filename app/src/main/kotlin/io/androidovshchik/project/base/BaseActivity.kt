@@ -12,13 +12,10 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import io.androidovshchik.project.extensions.context.newIntent
 import io.androidovshchik.project.screens.GMSActivity
-import io.reactivex.disposables.CompositeDisposable
 
 @SuppressLint("Registered")
 @Suppress("MemberVisibilityCanBePrivate")
 open class BaseActivity : AppCompatActivity() {
-
-    protected val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +24,6 @@ open class BaseActivity : AppCompatActivity() {
             startActivity(newIntent(GMSActivity::class.java))
             finish()
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.dispose()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -21,7 +21,7 @@ class SQLiteCallback(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
         // db.execSQL("ALTER TABLE ADD COLUMN TEXT NOT NULL DEFAULT ''")
     }
 
-    fun openAssetsDb(context: Context) {
+    fun copyFromAssets(context: Context) {
         val path = File("${context.applicationInfo.dataDir}${sep}databases")
         if (!path.exists()) {
             path.mkdir()

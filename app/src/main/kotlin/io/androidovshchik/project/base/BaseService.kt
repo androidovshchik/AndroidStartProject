@@ -12,15 +12,12 @@ import android.os.PowerManager
 import io.androidovshchik.project.extensions.context.newIntent
 import io.androidovshchik.project.extensions.context.newWakeLock
 import io.androidovshchik.project.triggers.ToastTrigger
-import io.reactivex.disposables.CompositeDisposable
 
 @SuppressLint("Registered")
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 open class BaseService : Service() {
 
     private var wakeLock: PowerManager.WakeLock? = null
-
-    protected val disposable = CompositeDisposable()
 
     override fun onBind(intent: Intent): IBinder? {
         return null
@@ -48,7 +45,6 @@ open class BaseService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        disposable.dispose()
         wakeLock?.release()
         wakeLock = null
     }

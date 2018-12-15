@@ -26,6 +26,6 @@ abstract class BaseAdapter<M : BaseModel> : RecyclerView.Adapter<BaseViewHolder<
     override fun getItemCount() = items.size
 
     @Suppress("unused")
-    protected fun inflateView(@LayoutRes layout: Int, parent: ViewGroup): View = LayoutInflater.from(parent.appContext())
-        .inflate(layout, parent, false)
+    protected fun inflateView(@LayoutRes layout: Int, parent: ViewGroup): View =
+        LayoutInflater.from(parent.appContext()).inflate(layout, parent, false)
 }
