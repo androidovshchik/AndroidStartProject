@@ -13,12 +13,12 @@ import io.androidovshchik.project.extensions.sep
 import java.io.File
 import java.io.FileOutputStream
 
-class DbOpenHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
+class SQLiteCallback(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {}
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // db.execSQL("ALTER TABLE  ADD COLUMN  TEXT NOT NULL DEFAULT ''")
+        // db.execSQL("ALTER TABLE ADD COLUMN TEXT NOT NULL DEFAULT ''")
     }
 
     fun openAssetsDb(context: Context) {

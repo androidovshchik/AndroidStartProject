@@ -20,9 +20,9 @@ class GMSActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gms)
         setTitle(R.string.title_gms)
-        update.setCompoundDrawablesWithIntrinsicBounds(VectorDrawableCompat.create(resources,
+        btn_update.setCompoundDrawablesWithIntrinsicBounds(VectorDrawableCompat.create(resources,
             R.drawable.ic_shop_white_24dp, theme), null, null, null)
-        update.setOnClickListener {
+        btn_update.setOnClickListener {
             startActionView("https://play.google.com/store/apps/details?id=" +
                 GoogleApiAvailability.GOOGLE_PLAY_SERVICES_PACKAGE)
         }
