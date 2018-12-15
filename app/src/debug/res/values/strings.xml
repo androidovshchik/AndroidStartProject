@@ -5,10 +5,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Debug version</string>
     <string name="developer_email" translatable="false">vladkalyuzhnyu@gmail.com</string>
-    <string name="error_title">An error has occurred</string>
-    <string name="error_text">Please send a letter to the developer to solve the problem</string>
-    <string name="error_email">Write an e-mail for feedback</string>
-    <string name="error_comment">Write a few words about what happened</string>
+    <string name="acra_error_subject">Crash report</string>
+    <string name="acra_error_title">An error has occurred</string>
+    <string name="acra_error_text">Please send a letter to the developer to solve the problem</string>
+    <string name="acra_error_email">Your e-mail for feedback</string>
+    <string name="acra_error_comment">Write a few words about what happened</string>
 
     <string name="ads_banner" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="ads_interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
