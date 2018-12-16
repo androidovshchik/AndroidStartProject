@@ -6,41 +6,19 @@
 
 package io.androidovshchik.project.extensions.context
 
-import android.app.Activity
 import android.app.AlarmManager
-import android.app.PendingIntent
 import android.app.Service
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.SystemClock
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.LayoutRes
-import io.androidovshchik.project.R
 import io.androidovshchik.project.extensions.isMarshmallowPlus
 import io.androidovshchik.project.extensions.isOreoPlus
 import io.androidovshchik.project.triggers.ToastTrigger
 import timber.log.Timber
-
-fun Context.allAppPermissions(): Array<String> = packageManager.getPackageInfo(packageName,
-    PackageManager.GET_PERMISSIONS).requestedPermissions ?: arrayOf()
-
-fun Context.inflateView(@LayoutRes layout: Int, parent: ViewGroup? = null): View = LayoutInflater.from(applicationContext).inflate(layout, parent, false)
-
-fun Context.newIntent(anyClass: Class<out Any>): Intent = Intent(applicationContext, anyClass)
-
-fun Context.newPendingActivity(activityClass: Class<out Activity>): PendingIntent = PendingIntent.getActivity(applicationContext, 0, newIntent(activityClass), PendingIntent.FLAG_UPDATE_CURRENT)
-
-fun Context.newPendingReceiver(receiverClass: Class<out BroadcastReceiver>): PendingIntent = PendingIntent.getBroadcast(applicationContext, 0, newIntent(receiverClass), PendingIntent.FLAG_UPDATE_CURRENT)
-
-fun Context.newPendingReceiver(action: String): PendingIntent = PendingIntent.getBroadcast(applicationContext, 0, Intent(action), PendingIntent.FLAG_UPDATE_CURRENT)
 
 fun Context.toastShort(message: String) = sendBroadcast(newIntent(ToastTrigger::class.java).apply {
     putExtra(ToastTrigger.EXTRA_MESSAGE, message)
@@ -51,8 +29,6 @@ fun Context.toastLong(message: String) = sendBroadcast(newIntent(ToastTrigger::c
     putExtra(ToastTrigger.EXTRA_MESSAGE, message)
     putExtra(ToastTrigger.EXTRA_DURATION, Toast.LENGTH_LONG)
 })
-
-fun Context.createChooser(intent: Intent): Intent = Intent.createChooser(intent, getString(R.string.choose_app))
 
 fun Context.startActionView(link: String): Boolean {
     return try {
@@ -96,8 +72,4 @@ fun Context.nextAlarm(interval: Int, receiverClass: Class<out BroadcastReceiver>
         else -> alarmManager().setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP,
             SystemClock.elapsedRealtime() + interval, newPendingReceiver(receiverClass))
     }
-}
-
-fun Context.scanFile(path: String) {
-    MediaScannerConnection.scanFile(applicationContext, arrayOf(path), null, null)
 }

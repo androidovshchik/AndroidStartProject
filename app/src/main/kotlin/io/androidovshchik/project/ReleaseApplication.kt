@@ -17,4 +17,8 @@ class ReleaseApplication : BaseApplication() {
         super.onCreate()
         Timber.plant(ReleaseTree())
     }
+
+    override fun isMainProcess(): Boolean {
+        return true
+    }
 }

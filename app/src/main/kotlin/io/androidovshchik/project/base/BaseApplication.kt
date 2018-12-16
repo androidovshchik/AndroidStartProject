@@ -11,7 +11,7 @@ import com.marcinmoskala.kotlinpreferences.PreferenceHolder
 
 @SuppressLint("Registered")
 @Suppress("unused")
-open class BaseApplication : MultiDexApplication() {
+abstract class BaseApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
@@ -21,7 +21,5 @@ open class BaseApplication : MultiDexApplication() {
         }
     }
 
-    open fun isMainProcess(): Boolean {
-        return true
-    }
+    abstract fun isMainProcess(): Boolean
 }
