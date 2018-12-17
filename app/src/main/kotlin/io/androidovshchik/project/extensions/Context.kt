@@ -4,7 +4,7 @@
 
 @file:Suppress("unused")
 
-package io.androidovshchik.project.extensions.context
+package io.androidovshchik.project.extensions
 
 import android.app.AlarmManager
 import android.app.Service
@@ -12,8 +12,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.os.SystemClock
 import android.widget.Toast
-import io.androidovshchik.project.extensions.isMarshmallowPlus
-import io.androidovshchik.project.extensions.isOreoPlus
 import io.androidovshchik.project.receivers.ToastReceiver
 import org.jetbrains.anko.alarmManager
 import org.jetbrains.anko.intentFor
@@ -30,36 +28,30 @@ fun Context.longBgToast(message: String) = sendBroadcast(intentFor<ToastReceiver
     putExtra(ToastReceiver.EXTRA_DURATION, Toast.LENGTH_LONG)
 })
 
-inline fun <reified T : Service> Context.startForegroundService() {
-    if (isOreoPlus()) {
-        startForegroundService(newIntent(serviceClass))
-    } else {
-        startService<T>()
-    }
-}
-
 inline fun <reified T : Service> Context.restartService() {
     stopService<T>()
     startService<T>()
 }
 
-fun Context.restartForegroundService(serviceClass: Class<out Service>) {
-    stopService(serviceClass)
-    startForegroundService(serviceClass)
+inline fun <reified T : Service> Context.restartForegroundService() {
+    stopService<T>()
+    startForegroundService<T>()
 }
 
-inline fun <reified T : Service> Context.stopService() {
-    if (isServiceRunning<T>()) {
-        org.jetbrains.anko.stopService<T>()
+inline fun <reified T : Service> Context.startForegroundService() {
+    if (isOreoPlus()) {
+        startForegroundService(intentFor<T>())
+    } else {
+        startService<T>()
     }
 }
 
-fun Context.nextAlarm(interval: Int, receiverClass: Class<out BroadcastReceiver>) {
-    cancelAlarm(receiverClass)
+inline fun <reified T : BroadcastReceiver> Context.nextAlarm(interval: Int) {
+    cancelAlarm<T>()
     when {
         isMarshmallowPlus() -> alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            SystemClock.elapsedRealtime() + interval, newPendingReceiver(receiverClass))
+            SystemClock.elapsedRealtime() + interval, pendingReceiverFor<T>())
         else -> alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            SystemClock.elapsedRealtime() + interval, newPendingReceiver(receiverClass))
+            SystemClock.elapsedRealtime() + interval, pendingReceiverFor<T>())
     }
 }
