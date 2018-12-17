@@ -11,11 +11,11 @@ import com.facebook.stetho.Stetho
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItem
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItemHyperionPlugin
 import io.androidovshchik.project.base.BaseApplication
-import io.androidovshchik.project.extensions.context.createChooser
-import io.androidovshchik.project.extensions.context.toastShort
-import io.androidovshchik.project.extensions.isLollipopPlus
-import io.androidovshchik.project.extensions.newTask
+import io.androidovshchik.project.extensions.bgToast
+import io.androidovshchik.project.extensions.createChooser
+import io.androidovshchik.project.extensions.mailTo
 import io.androidovshchik.project.utils.DebugTree
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +24,8 @@ import org.acra.config.CoreConfigurationBuilder
 import org.acra.config.DialogConfigurationBuilder
 import org.acra.config.MailSenderConfigurationBuilder
 import org.acra.data.StringFormat
+import org.jetbrains.anko.newTask
+import org.jetbrains.anko.toast
 import timber.log.Timber
 import java.io.BufferedReader
 
@@ -38,22 +40,14 @@ class DebugApplication : BaseApplication() {
             return
         }
         Timber.plant(DebugTree())
-        Timber.d("*** DEVICE INFO ***")
+        Timber.d("VERSION_CODE: ${BuildConfig.VERSION_CODE}")
         Timber.d("SDK_INT: ${Build.VERSION.SDK_INT}")
         Timber.d("OS_ARCH: ${System.getProperty("os.arch")}")
-        if (isLollipopPlus()) {
-            Timber.d("SUPPORTED_32_BIT_ABIS: ${Build.SUPPORTED_32_BIT_ABIS.asList()}")
-            Timber.d("SUPPORTED_64_BIT_ABIS: ${Build.SUPPORTED_64_BIT_ABIS.asList()}")
-        } else {
-            Timber.d("ABI: ${Build.CPU_ABI}")
-            Timber.d("ABI2: ${Build.CPU_ABI2}")
-        }
         Timber.d("MANUFACTURER: ${Build.MANUFACTURER}")
         Timber.d("BRAND: ${Build.BRAND}")
         Timber.d("MODEL: ${Build.MODEL}")
         Timber.d("DEVICE: ${Build.DEVICE}")
         Timber.d("PRODUCT: ${Build.PRODUCT}")
-        Timber.d("*******************")
         Stetho.initializeWithDefaults(applicationContext)
         ACRA.init(this, CoreConfigurationBuilder(applicationContext)
             .setBuildConfigClass(BuildConfig::class.java)
@@ -78,22 +72,20 @@ class DebugApplication : BaseApplication() {
             .text(getString(R.string.hype_report_subtitle))
             .image(R.drawable.ic_send_grey_500_24dp)
             .clickListener {
-                toastShort(getString(R.string.wait))
-                try {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        val process = Runtime.getRuntime()
-                            .exec("logcat -d")
-                        startActivity(createChooser(Intent(Intent.ACTION_SEND).apply {
-                            type = "message/rfc822"
-                            putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.developer_email)))
-                            putExtra(Intent.EXTRA_SUBJECT, getString(R.string.hype_report_logs))
-                            putExtra(Intent.EXTRA_TEXT, process.inputStream.bufferedReader()
-                                .use(BufferedReader::readText))
-                        }).newTask())
-                    }
-                } catch (e: Exception) {
+                toast(getString(R.string.wait))
+                CoroutineScope(Dispatchers.IO + CoroutineExceptionHandler { _, e ->
                     Timber.e(e)
-                    toastShort("${e.message}")
+                    bgToast("${e.message}")
+                }).launch {
+                    val process = Runtime.getRuntime()
+                        .exec("logcat -d")
+                    startActivity(createChooser(Intent(Intent.ACTION_SENDTO).apply {
+                        data = mailTo
+                        putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.developer_email)))
+                        putExtra(Intent.EXTRA_SUBJECT, getString(R.string.hype_report_logs))
+                        putExtra(Intent.EXTRA_TEXT, process.inputStream.bufferedReader()
+                            .use(BufferedReader::readText))
+                    }).newTask())
                 }
             }
             .build())

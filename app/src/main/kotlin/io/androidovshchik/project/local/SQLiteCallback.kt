@@ -11,6 +11,7 @@ import io.androidovshchik.project.extensions.sep
 import java.io.File
 import java.io.FileOutputStream
 
+@Suppress("unused")
 class SQLiteCallback(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {}

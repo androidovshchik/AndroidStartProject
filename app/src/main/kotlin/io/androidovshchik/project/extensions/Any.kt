@@ -6,6 +6,7 @@
 
 package io.androidovshchik.project.extensions
 
+import android.net.Uri
 import android.os.Build
 import android.os.Looper
 import java.io.File
@@ -15,6 +16,9 @@ val sep: String
 
 val newLine: String
     get() = System.getProperty("line.separator") ?: "\n"
+
+val mailTo: Uri
+    get() = Uri.parse("mailto:")
 
 val isUiThread: Boolean
     get() = Looper.myLooper() == Looper.getMainLooper()
