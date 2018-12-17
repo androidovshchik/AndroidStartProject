@@ -11,8 +11,8 @@ import android.app.Service
 
 @Suppress("DEPRECATION")
 inline fun <reified T : Service> ActivityManager.isServiceRunning(): Boolean {
-    for (service in getRunningServices(Integer.MAX_VALUE)) {
-        if (T::class.java.name == service.service.className) {
+    for (runningService in getRunningServices(Integer.MAX_VALUE)) {
+        if (T::class.java.name == runningService.service.className) {
             return true
         }
     }
