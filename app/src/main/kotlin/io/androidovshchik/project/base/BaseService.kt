@@ -9,10 +9,10 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.os.PowerManager
-import io.androidovshchik.project.extensions.context.newWakeLock
+import org.jetbrains.anko.powerManager
 
+@Suppress("unused")
 @SuppressLint("Registered")
-@Suppress("MemberVisibilityCanBePrivate", "unused")
 open class BaseService : Service() {
 
     private var wakeLock: PowerManager.WakeLock? = null
@@ -23,7 +23,8 @@ open class BaseService : Service() {
 
     @SuppressLint("WakelockTimeout")
     protected fun acquireWakeLock() {
-        wakeLock = newWakeLock(javaClass.simpleName)
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, javaClass.simpleName)
+        wakeLock?.acquire()
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {

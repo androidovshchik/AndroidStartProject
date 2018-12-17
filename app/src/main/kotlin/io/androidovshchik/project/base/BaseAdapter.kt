@@ -6,16 +6,16 @@ package io.androidovshchik.project.base
 
 import androidx.recyclerview.widget.RecyclerView
 
-@Suppress("UNUSED_PARAMETER")
-abstract class BaseAdapter<M : BaseModel> : RecyclerView.Adapter<BaseViewHolder<M>>() {
+@Suppress("unused")
+abstract class BaseAdapter<T : BaseModel> : RecyclerView.Adapter<BaseViewHolder<T>>() {
 
     @Suppress("MemberVisibilityCanBePrivate")
-    val items = arrayListOf<M>()
+    val items = arrayListOf<T>()
 
     override fun getItemViewType(position: Int) = items[position].viewType
 
-    override fun onBindViewHolder(holder: BaseViewHolder<M>, position: Int) {
-        holder.bindItem(items[position])
+    override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {
+        holder.onBindItem(items[position])
     }
 
     override fun getItemCount() = items.size

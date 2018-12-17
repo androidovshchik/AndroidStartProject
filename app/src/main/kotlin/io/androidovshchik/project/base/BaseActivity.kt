@@ -10,21 +10,21 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import io.androidovshchik.project.extensions.context.newIntent
-import io.androidovshchik.project.screens.GMSActivity
+import io.androidovshchik.project.screens.gms.GMSActivity
 import io.androidovshchik.project.utils.CompositeJob
+import org.jetbrains.anko.intentFor
 
 @SuppressLint("Registered")
-@Suppress("MemberVisibilityCanBePrivate")
 open class BaseActivity : AppCompatActivity() {
 
+    @Suppress("MemberVisibilityCanBePrivate")
     protected val job = CompositeJob()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (GoogleApiAvailability.getInstance()
                 .isGooglePlayServicesAvailable(applicationContext) != ConnectionResult.SUCCESS) {
-            startActivity(newIntent(GMSActivity::class.java))
+            startActivity(intentFor<GMSActivity>())
             finish()
         }
     }

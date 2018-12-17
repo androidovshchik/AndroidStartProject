@@ -8,10 +8,11 @@ import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-@Suppress("UNUSED_PARAMETER")
-abstract class BaseViewHolder<M : BaseModel>(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
+@Suppress("UNUSED_PARAMETER", "unused")
+abstract class BaseViewHolder<T : BaseModel>(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
 
-    abstract fun bindItem(item: M)
+    abstract fun onBindItem(item: T)
 
-    fun context(): Context = itemView.context.applicationContext
+    val appContext: Context
+        get() = itemView.context.applicationContext
 }
