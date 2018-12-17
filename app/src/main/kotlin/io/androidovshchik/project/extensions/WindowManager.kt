@@ -6,19 +6,19 @@
 
 package io.androidovshchik.project.extensions
 
-import android.annotation.SuppressLint
 import android.graphics.Point
 import android.view.WindowManager
 
-fun WindowManager.getWindowSize(): Point {
-    val size = Point()
-    defaultDisplay.getSize(size)
-    return size
-}
+val WindowManager.windowSize: Point
+    get() {
+        val size = Point()
+        defaultDisplay.getSize(size)
+        return size
+    }
 
-@SuppressLint("ObsoleteSdkInt")
-fun WindowManager.getScreenSize(): Point {
-    val size = Point()
-    defaultDisplay.getRealSize(size)
-    return size
-}
+val WindowManager.screenSize: Point
+    get() {
+        val size = Point()
+        defaultDisplay.getRealSize(size)
+        return size
+    }

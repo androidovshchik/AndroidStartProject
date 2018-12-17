@@ -9,28 +9,32 @@ package io.androidovshchik.project.extensions
 import android.content.Context
 import android.view.View
 
-fun View.appContext(): Context = context.applicationContext
+val View.appContext: Context
+    get() = context.applicationContext
 
-fun View.isVisible(): Boolean = visibility == View.VISIBLE
+val View.isVisible: Boolean
+    get() = visibility == View.VISIBLE
 
-fun View.isInvisible(): Boolean = visibility == View.INVISIBLE
+val View.isInvisible: Boolean
+    get() = visibility == View.INVISIBLE
 
-fun View.isGone(): Boolean = visibility == View.GONE
+val View.isGone: Boolean
+    get() = visibility == View.GONE
 
 fun View.setVisible() {
-    if (!isVisible()) {
+    if (!isVisible) {
         visibility = View.VISIBLE
     }
 }
 
 fun View.setInvisible() {
-    if (!isInvisible()) {
+    if (!isInvisible) {
         visibility = View.INVISIBLE
     }
 }
 
 fun View.setGone() {
-    if (!isGone()) {
+    if (!isGone) {
         visibility = View.GONE
     }
 }
