@@ -23,12 +23,12 @@ val mailTo: Uri
 val isUiThread: Boolean
     get() = Looper.myLooper() == Looper.getMainLooper()
 
-fun isLollipopPlus(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+fun isLollipopPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
-fun isMarshmallowPlus(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+fun isMarshmallowPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
 
-fun isNougatPlus(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+fun isNougatPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
 
-fun isOreoPlus(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+fun isOreoPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
-fun isPiePlus(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P
+fun isPiePlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.P

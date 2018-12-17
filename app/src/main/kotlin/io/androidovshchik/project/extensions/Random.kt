@@ -14,7 +14,7 @@ const val LOWER_LETTERS = "abcdefghijklmnopqrstuvwxyz"
 const val LETTERS = UPPER_LETTERS + LOWER_LETTERS
 const val CHARS = NUMBERS + LETTERS
 
-fun Random.nextInt(range: IntRange): Int = range.start + nextInt(range.last - range.start + 1)
+fun Random.nextInt(range: IntRange) = range.start + nextInt(range.last - range.start + 1)
 
 fun Random.nextString(range: IntRange, chars: String = CHARS): String {
     var string = ""

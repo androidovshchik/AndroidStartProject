@@ -18,32 +18,31 @@ import android.graphics.Point
 import android.media.MediaScannerConnection
 import android.os.SystemClock
 import android.widget.Toast
+import androidx.annotation.DrawableRes
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import io.androidovshchik.project.R
 import io.androidovshchik.project.receivers.ToastReceiver
 import org.jetbrains.anko.*
 
-fun Context.bgToast(message: String) = sendBroadcast(intentFor<ToastReceiver>().apply {
-    putExtra(ToastReceiver.EXTRA_MESSAGE, message)
-    putExtra(ToastReceiver.EXTRA_DURATION, Toast.LENGTH_SHORT)
-})
-
-fun Context.longBgToast(message: String) = sendBroadcast(intentFor<ToastReceiver>().apply {
-    putExtra(ToastReceiver.EXTRA_MESSAGE, message)
-    putExtra(ToastReceiver.EXTRA_DURATION, Toast.LENGTH_LONG)
-})
-
 fun Context.createChooser(intent: Intent): Intent = Intent.createChooser(intent, getString(R.string.choose_app))
 
-inline fun <reified T : Activity> Context.pendingActivityFor(flags: Int = PendingIntent.FLAG_UPDATE_CURRENT, vararg params: Pair<String, Any?>): PendingIntent =
-    PendingIntent.getActivity(applicationContext, 0, intentFor<T>(*params), flags)
+fun Context.createXmlDrawable(@DrawableRes drawable: Int) = VectorDrawableCompat.create(resources, drawable, theme)
 
-inline fun <reified T : BroadcastReceiver> Context.pendingReceiverFor(flags: Int = PendingIntent.FLAG_UPDATE_CURRENT, vararg params: Pair<String, Any?>): PendingIntent =
-    PendingIntent.getBroadcast(applicationContext, 0, intentFor<T>(*params), flags)
+fun Context.bgToast(message: String) {
+    sendBroadcast(intentFor<ToastReceiver>().apply {
+        putExtra(ToastReceiver.EXTRA_MESSAGE, message)
+        putExtra(ToastReceiver.EXTRA_DURATION, Toast.LENGTH_SHORT)
+    })
+}
 
-inline fun <reified T : BroadcastReceiver> Context.pendingReceiverFor(action: String, flags: Int = PendingIntent.FLAG_UPDATE_CURRENT): PendingIntent =
-    PendingIntent.getBroadcast(applicationContext, 0, Intent(action), flags)
+fun Context.longBgToast(message: String) {
+    sendBroadcast(intentFor<ToastReceiver>().apply {
+        putExtra(ToastReceiver.EXTRA_MESSAGE, message)
+        putExtra(ToastReceiver.EXTRA_DURATION, Toast.LENGTH_LONG)
+    })
+}
 
-inline fun <reified T : Service> Context.isServiceRunning(): Boolean = activityManager.isServiceRunning<T>()
+inline fun <reified T : Service> Context.isServiceRunning() = activityManager.isServiceRunning<T>()
 
 inline fun <reified T : Service> Context.restartService() {
     if (isServiceRunning<T>()) {
@@ -67,9 +66,14 @@ inline fun <reified T : Service> Context.startForegroundService() {
     }
 }
 
-fun Context.createSilentChannel() = notificationManager.createSilentChannel()
+inline fun <reified T : Activity> Context.pendingActivityFor(flags: Int = PendingIntent.FLAG_UPDATE_CURRENT, vararg params: Pair<String, Any?>): PendingIntent =
+    PendingIntent.getActivity(applicationContext, 0, intentFor<T>(*params), flags)
 
-fun Context.createNoisyChannel() = notificationManager.createNoisyChannel()
+inline fun <reified T : BroadcastReceiver> Context.pendingReceiverFor(flags: Int = PendingIntent.FLAG_UPDATE_CURRENT, vararg params: Pair<String, Any?>): PendingIntent =
+    PendingIntent.getBroadcast(applicationContext, 0, intentFor<T>(*params), flags)
+
+inline fun <reified T : BroadcastReceiver> Context.pendingReceiverFor(action: String, flags: Int = PendingIntent.FLAG_UPDATE_CURRENT): PendingIntent =
+    PendingIntent.getBroadcast(applicationContext, 0, Intent(action), flags)
 
 inline fun <reified T : BroadcastReceiver> Context.createAlarm(interval: Int) {
     cancelAlarm<T>()
@@ -81,11 +85,24 @@ inline fun <reified T : BroadcastReceiver> Context.createAlarm(interval: Int) {
     }
 }
 
-inline fun <reified T : BroadcastReceiver> Context.cancelAlarm() = alarmManager.cancel(pendingReceiverFor<T>())
+inline fun <reified T : BroadcastReceiver> Context.cancelAlarm() {
+    alarmManager.cancel(pendingReceiverFor<T>())
+}
 
-val Context.allPermissions: Array<String>
+fun Context.createSilentChannel() {
+    notificationManager.createSilentChannel()
+}
+
+fun Context.createNoisyChannel() {
+    notificationManager.createNoisyChannel()
+}
+
+val Context.allAppPermissions: Array<String>
     get() = packageManager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS).requestedPermissions
         ?: arrayOf()
+
+val Context.launchAppIntent: Intent
+    get() = packageManager.getLaunchIntentForPackage(packageName) ?: Intent()
 
 val Context.windowSize: Point
     get() = windowManager.windowSize
@@ -93,6 +110,9 @@ val Context.windowSize: Point
 val Context.screenSize: Point
     get() = windowManager.screenSize
 
-fun Context.openGooglePlay(newTask: Boolean = false) = browse("https://play.google.com/store/apps/details?id=$packageName", newTask)
+fun Context.openGooglePlay(newTask: Boolean = false) =
+    browse("https://play.google.com/store/apps/details?id=$packageName", newTask)
 
-fun Context.scanFiles(vararg paths: String) = MediaScannerConnection.scanFile(applicationContext, paths, null, null)
+fun Context.scanFiles(vararg paths: String) {
+    MediaScannerConnection.scanFile(applicationContext, paths, null, null)
+}

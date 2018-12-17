@@ -11,6 +11,16 @@ import android.text.InputFilter
 import android.text.InputType
 import android.text.method.DigitsKeyListener
 import android.widget.TextView
+import androidx.annotation.DrawableRes
+
+fun TextView.setCompoundXmlDrawables(@DrawableRes vararg drawables: Int) {
+    setCompoundDrawablesWithIntrinsicBounds(
+        appContext.createXmlDrawable(drawables.getOrNull(0) ?: 0),
+        appContext.createXmlDrawable(drawables.getOrNull(1) ?: 0),
+        appContext.createXmlDrawable(drawables.getOrNull(2) ?: 0),
+        appContext.createXmlDrawable(drawables.getOrNull(3) ?: 0)
+    )
+}
 
 @Suppress("DEPRECATION")
 fun TextView.setHtml(html: String, flags: Int = 0 /*== Html.FROM_HTML_MODE_LEGACY*/) {
