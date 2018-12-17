@@ -20,9 +20,8 @@ class ReleaseTree : Timber.DebugTree() {
 
     @SuppressLint("LogNotTimber")
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
-        if (!isLoggable(tag, priority)) {
-            return
+        if (isLoggable(tag, priority)) {
+            super.log(priority, tag, message, t)
         }
-        super.log(priority, tag, message, t)
     }
 }

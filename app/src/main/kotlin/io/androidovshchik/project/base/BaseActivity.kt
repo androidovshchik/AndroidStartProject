@@ -11,14 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import io.androidovshchik.project.screens.gms.GMSActivity
-import io.androidovshchik.project.utils.CompositeJob
 import org.jetbrains.anko.intentFor
 
 @SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity() {
-
-    @Suppress("MemberVisibilityCanBePrivate")
-    protected val job = CompositeJob()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +31,5 @@ open class BaseActivity : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        job.cancelAll()
     }
 }

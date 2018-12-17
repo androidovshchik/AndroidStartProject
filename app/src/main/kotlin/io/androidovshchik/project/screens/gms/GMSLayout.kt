@@ -4,17 +4,19 @@
 
 package io.androidovshchik.project.screens.gms
 
-import android.view.Gravity
-import io.androidovshchik.project.R
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoComponent
+import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.constraint.layout.constraintLayout
+import org.jetbrains.anko.dip
+import org.jetbrains.anko.padding
 
 class GMSLayout : AnkoComponent<GMSActivity> {
 
     override fun createView(ui: AnkoContext<GMSActivity>) = with(ui) {
-        androidx.constraintlayout.widget.ConstraintLayout {
+        constraintLayout {
             padding = dip(16)
 
-            textView(R.string.old_gms_version) {
+            /*textView(R.string.old_gms_version) {
                 gravity = Gravity.CENTER
                 textColor = R.color.textLightPrimary
                 textSize = 17f
@@ -29,7 +31,7 @@ class GMSLayout : AnkoComponent<GMSActivity> {
                 id = Ids.btn_update
                 padding = dip(12)
                 app:layout_constraintBottom_toBottomOf = parent
-            }.lparams(width = matchParent, height = wrapContent)
+            }.lparams(width = matchParent, height = wrapContent)*/
         }
     }
 }
