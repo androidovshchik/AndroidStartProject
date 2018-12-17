@@ -21,7 +21,7 @@
         android:allowBackup="false"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".screens.MainActivity"
+            android:name=".screens.main.MainActivity"
             android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize">
             <intent-filter>
@@ -34,12 +34,21 @@
             android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"></activity>
         <activity
-            android:name=".screens.GMSActivity"
+            android:name=".screens.gms.GMSActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"></activity>
+
         <receiver
-            android:name=".triggers.RebootTrigger"
+            android:name=".receivers.InstallReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receivers.BootReceiver"
             android:enabled="true">
             <intent-filter
                 android:priority="999">
@@ -48,7 +57,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".triggers.ToastTrigger"
+            android:name=".receivers.ToastReceiver"
             android:enabled="true"
             android:exported="false">
         </receiver>
