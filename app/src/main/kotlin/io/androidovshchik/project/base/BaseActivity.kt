@@ -10,7 +10,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import io.androidovshchik.project.screens.gms.GMSActivity
+import io.androidovshchik.project.screens.GMSActivity
 import org.jetbrains.anko.intentFor
 
 @SuppressLint("Registered")
