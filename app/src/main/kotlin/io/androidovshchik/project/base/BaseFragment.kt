@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.androidovshchik.project.utils.CompositeJob
-import org.jetbrains.anko.include
 
 @Suppress("unused")
 abstract class BaseFragment : Fragment() {
@@ -24,7 +23,7 @@ abstract class BaseFragment : Fragment() {
         get() = arguments ?: Bundle()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return container?.include(layout)
+        return inflater.inflate(layout, container, false)
     }
 
     override fun onDestroy() {

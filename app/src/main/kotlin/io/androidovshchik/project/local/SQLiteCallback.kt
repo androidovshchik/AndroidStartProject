@@ -7,8 +7,6 @@ package io.androidovshchik.project.local
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import io.androidovshchik.project.DB_NAME
-import io.androidovshchik.project.DB_VERSION
 import io.androidovshchik.project.extensions.sep
 import java.io.File
 import java.io.FileOutputStream
@@ -36,5 +34,11 @@ class SQLiteCallback(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
                 }
             }
         }
+    }
+
+    companion object {
+
+        const val DB_NAME = "project.db"
+        const val DB_VERSION = 1
     }
 }

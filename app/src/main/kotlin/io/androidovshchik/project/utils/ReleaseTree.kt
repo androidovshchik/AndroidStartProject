@@ -6,7 +6,6 @@ package io.androidovshchik.project.utils
 
 import android.annotation.SuppressLint
 import android.util.Log
-import io.androidovshchik.project.extensions.newLine
 import timber.log.Timber
 
 class ReleaseTree : Timber.DebugTree() {
@@ -24,37 +23,6 @@ class ReleaseTree : Timber.DebugTree() {
         if (!isLoggable(tag, priority)) {
             return
         }
-        if (message.length < MAX_LOG_LENGTH) {
-            if (priority == Log.ASSERT) {
-                Log.wtf(tag, message)
-            } else {
-                Log.println(priority, tag, message)
-            }
-            return
-        }
-        var i = 0
-        val length = message.length
-        while (i < length) {
-            var maxI = message.indexOf(newLine, i)
-            if (maxI < 0) {
-                maxI = length
-            }
-            do {
-                val endI = Math.min(maxI, i + MAX_LOG_LENGTH)
-                val part = message.substring(i, endI)
-                if (priority == Log.ASSERT) {
-                    Log.wtf(tag, part)
-                } else {
-                    Log.println(priority, tag, part)
-                }
-                i = endI
-            } while (i < maxI)
-            i++
-        }
-    }
-
-    companion object {
-
-        private const val MAX_LOG_LENGTH = 4000
+        super.log(priority, tag, message, t)
     }
 }
