@@ -34,7 +34,7 @@ android {
     }
     buildTypes {
         debug {
-            applicationIdSuffix ".debug"
+            signingConfig signingConfigs.debug
         }
         release {
             shrinkResources true
@@ -69,10 +69,10 @@ dependencies {
 }
 
 dependencies {
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    // implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    // implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    // implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    // implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     // implementation 'com.snatik:storage:2.1.0'
 }
 

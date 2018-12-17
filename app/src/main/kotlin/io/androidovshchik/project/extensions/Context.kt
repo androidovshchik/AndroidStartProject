@@ -26,7 +26,9 @@ import org.jetbrains.anko.*
 
 fun Context.createChooser(intent: Intent): Intent = Intent.createChooser(intent, getString(R.string.choose_app))
 
-fun Context.createXmlDrawable(@DrawableRes drawable: Int) = VectorDrawableCompat.create(resources, drawable, theme)
+fun Context.createXmlDrawable(@DrawableRes drawable: Int) = if (drawable != 0) {
+    VectorDrawableCompat.create(resources, drawable, theme)
+} else null
 
 fun Context.bgToast(message: String) {
     sendBroadcast(intentFor<ToastReceiver>().apply {

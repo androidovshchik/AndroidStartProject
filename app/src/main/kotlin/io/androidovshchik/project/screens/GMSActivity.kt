@@ -19,7 +19,7 @@ class GMSActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_gms)
         setTitle(R.string.title_gms)
         btn_update.setCompoundXmlDrawables(R.drawable.ic_shop_white_24dp)
         btn_update.setOnClickListener {
