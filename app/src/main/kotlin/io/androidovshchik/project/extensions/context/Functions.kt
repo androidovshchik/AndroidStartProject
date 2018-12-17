@@ -8,49 +8,39 @@ package io.androidovshchik.project.extensions.context
 
 import android.app.AlarmManager
 import android.app.Service
-import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.SystemClock
 import android.widget.Toast
 import io.androidovshchik.project.extensions.isMarshmallowPlus
 import io.androidovshchik.project.extensions.isOreoPlus
-import io.androidovshchik.project.triggers.ToastTrigger
-import timber.log.Timber
+import io.androidovshchik.project.receivers.ToastReceiver
+import org.jetbrains.anko.alarmManager
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startService
+import org.jetbrains.anko.stopService
 
-fun Context.toastShort(message: String) = sendBroadcast(newIntent(ToastTrigger::class.java).apply {
-    putExtra(ToastTrigger.EXTRA_MESSAGE, message)
-    putExtra(ToastTrigger.EXTRA_DURATION, Toast.LENGTH_SHORT)
+fun Context.bgToast(message: String) = sendBroadcast(intentFor<ToastReceiver>().apply {
+    putExtra(ToastReceiver.EXTRA_MESSAGE, message)
+    putExtra(ToastReceiver.EXTRA_DURATION, Toast.LENGTH_SHORT)
 })
 
-fun Context.toastLong(message: String) = sendBroadcast(newIntent(ToastTrigger::class.java).apply {
-    putExtra(ToastTrigger.EXTRA_MESSAGE, message)
-    putExtra(ToastTrigger.EXTRA_DURATION, Toast.LENGTH_LONG)
+fun Context.longBgToast(message: String) = sendBroadcast(intentFor<ToastReceiver>().apply {
+    putExtra(ToastReceiver.EXTRA_MESSAGE, message)
+    putExtra(ToastReceiver.EXTRA_DURATION, Toast.LENGTH_LONG)
 })
 
-fun Context.startActionView(link: String): Boolean {
-    return try {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link)))
-        true
-    } catch (e: ActivityNotFoundException) {
-        Timber.e(e)
-        false
-    }
-}
-
-fun Context.startForegroundService(serviceClass: Class<out Service>) {
+inline fun <reified T : Service> Context.startForegroundService() {
     if (isOreoPlus()) {
         startForegroundService(newIntent(serviceClass))
     } else {
-        startService(newIntent(serviceClass))
+        startService<T>()
     }
 }
 
-fun Context.restartService(serviceClass: Class<out Service>) {
-    stopService(serviceClass)
-    startService(newIntent(serviceClass))
+inline fun <reified T : Service> Context.restartService() {
+    stopService<T>()
+    startService<T>()
 }
 
 fun Context.restartForegroundService(serviceClass: Class<out Service>) {
@@ -58,18 +48,18 @@ fun Context.restartForegroundService(serviceClass: Class<out Service>) {
     startForegroundService(serviceClass)
 }
 
-fun Context.stopService(serviceClass: Class<out Service>) {
-    if (isServiceRunning(serviceClass)) {
-        stopService(newIntent(serviceClass))
+inline fun <reified T : Service> Context.stopService() {
+    if (isServiceRunning<T>()) {
+        org.jetbrains.anko.stopService<T>()
     }
 }
 
 fun Context.nextAlarm(interval: Int, receiverClass: Class<out BroadcastReceiver>) {
     cancelAlarm(receiverClass)
     when {
-        isMarshmallowPlus() -> alarmManager().setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+        isMarshmallowPlus() -> alarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
             SystemClock.elapsedRealtime() + interval, newPendingReceiver(receiverClass))
-        else -> alarmManager().setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+        else -> alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP,
             SystemClock.elapsedRealtime() + interval, newPendingReceiver(receiverClass))
     }
 }

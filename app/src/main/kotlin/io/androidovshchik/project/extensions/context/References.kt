@@ -6,68 +6,49 @@
 
 package io.androidovshchik.project.extensions.context
 
-import android.app.*
+import android.app.Activity
+import android.app.PendingIntent
+import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Point
-import android.media.AudioManager
 import android.media.MediaScannerConnection
-import android.os.PowerManager
-import android.telephony.TelephonyManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import io.androidovshchik.project.R
 import io.androidovshchik.project.extensions.*
+import org.jetbrains.anko.*
 
-fun Context.activityManager(): ActivityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+val Context.windowSize: Point
+    get() = windowManager.windowSize
 
-fun Context.audioManager(): AudioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+val Context.screenSize: Point
+    get() = windowManager.screenSize
 
-fun Context.inputMethodManager(): InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+fun Context.createSilentChannel() = notificationManager.createSilentChannel()
 
-fun Context.keyguardManager(): KeyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+fun Context.createNoisyChannel() = notificationManager.createNoisyChannel()
 
-fun Context.notificationManager(): NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+inline fun <reified T : Service> Context.isServiceRunning(): Boolean = activityManager.isServiceRunning<T>()
 
-fun Context.alarmManager(): AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+inline fun <reified T : Activity> Context.pendingActivityFor(flags: Int = PendingIntent.FLAG_UPDATE_CURRENT, vararg params: Pair<String, Any?>): PendingIntent =
+    PendingIntent.getActivity(applicationContext, 0, intentFor<T>(*params), flags)
 
-fun Context.telephonyManager(): TelephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+inline fun <reified T : BroadcastReceiver> Context.pendingReceiverFor(flags: Int = PendingIntent.FLAG_UPDATE_CURRENT, vararg params: Pair<String, Any?>): PendingIntent =
+    PendingIntent.getBroadcast(applicationContext, 0, intentFor<T>(*params), flags)
 
-fun Context.windowManager(): WindowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+inline fun <reified T : BroadcastReceiver> Context.pendingReceiverFor(action: String, flags: Int = PendingIntent.FLAG_UPDATE_CURRENT): PendingIntent =
+    PendingIntent.getBroadcast(applicationContext, 0, Intent(action), flags)
 
-fun Context.powerManager(): PowerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
-
-fun Context.isServiceRunning(serviceClass: Class<out Service>): Boolean = activityManager().isServiceRunning(serviceClass)
-
-fun Context.cancelAlarm(receiverClass: Class<out BroadcastReceiver>) = alarmManager().cancel(newPendingReceiver(receiverClass))
-
-fun Context.newWakeLock(name: String): PowerManager.WakeLock = powerManager().newWakeLock(name)
-
-fun Context.createSilentChannel() = notificationManager().createSilentChannel()
-
-fun Context.createNoisyChannel() = notificationManager().createNoisyChannel()
-
-fun Context.screenSize(): Point = windowManager().getScreenSize()
-
-fun Context.windowSize(): Point = windowManager().getWindowSize()
-
-fun Context.newIntent(anyClass: Class<out Any>): Intent = Intent(applicationContext, anyClass)
-
-fun Context.newPendingActivity(activityClass: Class<out Activity>): PendingIntent = PendingIntent.getActivity(applicationContext, 0, newIntent(activityClass), PendingIntent.FLAG_UPDATE_CURRENT)
-
-fun Context.newPendingReceiver(receiverClass: Class<out BroadcastReceiver>): PendingIntent = PendingIntent.getBroadcast(applicationContext, 0, newIntent(receiverClass), PendingIntent.FLAG_UPDATE_CURRENT)
-
-fun Context.newPendingReceiver(action: String): PendingIntent = PendingIntent.getBroadcast(applicationContext, 0, Intent(action), PendingIntent.FLAG_UPDATE_CURRENT)
+inline fun <reified T : BroadcastReceiver> Context.cancelAlarm() = alarmManager.cancel(pendingReceiverFor<T>())
 
 fun Context.createChooser(intent: Intent): Intent = Intent.createChooser(intent, getString(R.string.choose_app))
 
-fun Context.openGooglePlay() = startActionView("https://play.google.com/store/apps/details?id=$packageName")
+fun Context.openGooglePlay(newTask: Boolean = false) = browse("https://play.google.com/store/apps/details?id=$packageName", newTask)
 
 fun Context.inflateView(@LayoutRes layout: Int, parent: ViewGroup? = null): View = LayoutInflater.from(applicationContext).inflate(layout, parent, false)
 
