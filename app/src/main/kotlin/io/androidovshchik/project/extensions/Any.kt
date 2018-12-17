@@ -6,30 +6,18 @@
 
 package io.androidovshchik.project.extensions
 
-import android.content.res.Resources
 import android.os.Build
 import android.os.Looper
 import java.io.File
 
-val sep: String = File.separator
+val sep: String
+    get() = File.separator
 
-val newLine: String = System.getProperty("line.separator") ?: "\n"
+val newLine: String
+    get() = System.getProperty("line.separator") ?: "\n"
 
-fun dpToPx(dp: Int): Int = Math.round(dp * Resources.getSystem().displayMetrics.density)
-
-fun spToPx(sp: Int): Float = sp * Resources.getSystem().displayMetrics.scaledDensity
-
-fun isUiThread(): Boolean = Looper.myLooper() == Looper.getMainLooper()
-
-fun isPreLollipop(): Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
-
-fun isPreMarshmallow(): Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.M
-
-fun isPreNougat(): Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.N
-
-fun isPreOreo(): Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.O
-
-fun isPrePie(): Boolean = Build.VERSION.SDK_INT < Build.VERSION_CODES.P
+val isUiThread: Boolean
+    get() = Looper.myLooper() == Looper.getMainLooper()
 
 fun isLollipopPlus(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
