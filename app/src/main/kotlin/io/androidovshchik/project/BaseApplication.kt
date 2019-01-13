@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+ * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-package io.androidovshchik.project.base
+package io.androidovshchik.project
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatDelegate
@@ -23,4 +23,6 @@ abstract class BaseApplication : MultiDexApplication() {
     }
 
     abstract fun isMainProcess(): Boolean
+
+    abstract fun catchAppError(t: Throwable)
 }

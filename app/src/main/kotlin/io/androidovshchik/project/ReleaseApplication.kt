@@ -5,7 +5,6 @@
 package io.androidovshchik.project
 
 import android.annotation.SuppressLint
-import io.androidovshchik.project.base.BaseApplication
 import io.androidovshchik.project.utils.ReleaseTree
 import timber.log.Timber
 
@@ -20,5 +19,9 @@ class ReleaseApplication : BaseApplication() {
 
     override fun isMainProcess(): Boolean {
         return true
+    }
+
+    override fun catchAppError(t: Throwable) {
+        System.exit(1)
     }
 }
