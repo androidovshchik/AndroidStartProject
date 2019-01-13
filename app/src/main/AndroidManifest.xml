@@ -23,7 +23,7 @@
         <activity
             android:name=".screens.main.MainActivity"
             android:launchMode="singleTask"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize">
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,7 +33,7 @@
             android:name=".screens.GMSActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"></activity>
+            android:configChanges="orientation|screenSize"></activity>
         <receiver
             android:name=".receivers.InstallReceiver"
             android:enabled="true">
@@ -43,7 +43,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".receivers.BootReceiver"
+            android:name=".receivers.RebootReceiver"
             android:enabled="true">
             <intent-filter
                 android:priority="999">

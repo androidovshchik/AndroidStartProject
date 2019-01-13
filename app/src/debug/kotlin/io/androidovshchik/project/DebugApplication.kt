@@ -28,6 +28,10 @@ import org.jetbrains.anko.toast
 import timber.log.Timber
 import java.io.BufferedReader
 
+private val DEBUG_DEVICES = arrayOf(
+    "8ee857c0e70c8538"// Nexus 9 Android 7.1.2
+)
+
 @Suppress("unused")
 @SuppressLint("Registered", "HardwareIds")
 class DebugApplication : BaseApplication() {
@@ -49,7 +53,7 @@ class DebugApplication : BaseApplication() {
         Timber.d("MODEL: ${Build.MODEL}")
         Timber.d("DEVICE: ${Build.DEVICE}")
         Timber.d("PRODUCT: ${Build.PRODUCT}")
-        if (androidId !in TEST_DEVICES) {
+        if (androidId !in DEBUG_DEVICES) {
             ACRA.init(this, CoreConfigurationBuilder(applicationContext)
                 .setBuildConfigClass(BuildConfig::class.java)
                 .setReportFormat(StringFormat.KEY_VALUE_LIST)
@@ -98,12 +102,5 @@ class DebugApplication : BaseApplication() {
 
     override fun catchAppError(t: Throwable) {
         ACRA.getErrorReporter().handleException(t)
-    }
-
-    companion object {
-
-        val TEST_DEVICES = arrayOf(
-            "8ee857c0e70c8538"// Nexus 9 Android 7.1.2
-        )
     }
 }

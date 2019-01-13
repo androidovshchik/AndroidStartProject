@@ -1,6 +1,8 @@
 buildscript {
     repositories {
-        google()
+        maven {
+            url 'https://maven.google.com'
+        }
         jcenter {
             url "http://jcenter.bintray.com"
         }
@@ -28,7 +30,9 @@ dependencyGraphGenerator {
 
 allprojects {
     repositories {
-        google()
+        maven {
+            url 'https://maven.google.com'
+        }
         jcenter {
             url "http://jcenter.bintray.com"
         }
@@ -39,5 +43,6 @@ allprojects {
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+    delete "$rootDir/build"
+    delete "$rootDir/app/build"
 }

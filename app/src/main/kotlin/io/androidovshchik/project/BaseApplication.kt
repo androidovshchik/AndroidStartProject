@@ -7,7 +7,7 @@ package io.androidovshchik.project
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
-import com.marcinmoskala.kotlinpreferences.PreferenceHolder
+import timber.log.Timber
 
 @SuppressLint("Registered")
 @Suppress("unused")
@@ -18,8 +18,11 @@ abstract class BaseApplication : MultiDexApplication() {
         if (!isMainProcess()) {
             return
         }
+        Thread.setDefaultUncaughtExceptionHandler { _, t ->
+            Timber.e(t)
+            catchAppError(t)
+        }
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-        PreferenceHolder.setContext(applicationContext)
     }
 
     abstract fun isMainProcess(): Boolean

@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+ * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-package io.androidovshchik.project.screens.base
+package io.androidovshchik.project.services
 
 import android.content.Intent
 import android.os.Binder

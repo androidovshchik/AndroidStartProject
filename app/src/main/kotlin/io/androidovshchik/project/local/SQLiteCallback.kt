@@ -11,6 +11,9 @@ import io.androidovshchik.project.extensions.sep
 import java.io.File
 import java.io.FileOutputStream
 
+private const val DB_NAME = "project.db"
+private const val DB_VERSION = 1
+
 @Suppress("unused")
 class SQLiteCallback(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
@@ -35,11 +38,5 @@ class SQLiteCallback(context: Context) : SQLiteOpenHelper(context, DB_NAME, null
                 }
             }
         }
-    }
-
-    companion object {
-
-        const val DB_NAME = "project.db"
-        const val DB_VERSION = 1
     }
 }

@@ -18,7 +18,7 @@ abstract class BaseFragment : Fragment() {
     protected val args: Bundle
         get() = arguments ?: Bundle()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(layout, container, false)
     }
 }
