@@ -12,4 +12,6 @@ import android.util.Patterns
 val String.isEmail: Boolean
     get() = Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
+fun String.toUri(): Uri = Uri.parse(this)
+
 fun String.toFileUri(): Uri = Uri.parse("file://$this")

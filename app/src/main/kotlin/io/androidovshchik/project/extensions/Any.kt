@@ -6,7 +6,8 @@
 
 package io.androidovshchik.project.extensions
 
-import android.net.Uri
+import android.graphics.Bitmap
+import android.graphics.Rect
 import android.os.Build
 import android.os.Looper
 import java.io.File
@@ -17,11 +18,12 @@ val sep: String
 val newLine: String
     get() = System.getProperty("line.separator") ?: "\n"
 
-val mailTo: Uri
-    get() = Uri.parse("mailto:")
-
 val isUiThread: Boolean
     get() = Looper.myLooper() == Looper.getMainLooper()
+
+fun createRect(width: Int, height: Int = width): Rect = Rect(0, 0, width, height)
+
+fun createBitmap(width: Int, height: Int = width): Bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
 
 fun isLollipopPlus() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
