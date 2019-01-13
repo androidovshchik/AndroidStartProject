@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+ * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
 @file:Suppress("unused", "NOTHING_TO_INLINE")
