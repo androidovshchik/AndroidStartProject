@@ -15,6 +15,8 @@ abstract class BaseFragment : Fragment() {
 
     abstract val layout: Int
 
+    open val title: String? = null
+
     protected val args: Bundle
         get() = arguments ?: Bundle()
 
