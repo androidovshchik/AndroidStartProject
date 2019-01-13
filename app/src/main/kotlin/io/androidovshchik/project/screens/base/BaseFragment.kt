@@ -2,7 +2,7 @@
  * Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-package io.androidovshchik.project.base
+package io.androidovshchik.project.screens.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

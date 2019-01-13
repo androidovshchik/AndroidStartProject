@@ -2,11 +2,11 @@
  * Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-package io.androidovshchik.project.screens
+package io.androidovshchik.project.screens.main
 
 import android.os.Bundle
 import io.androidovshchik.project.R
-import io.androidovshchik.project.base.BaseActivity
+import io.androidovshchik.project.screens.base.BaseActivity
 
 class MainActivity : BaseActivity() {
 
