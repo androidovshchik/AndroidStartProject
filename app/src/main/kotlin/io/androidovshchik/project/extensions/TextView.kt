@@ -13,13 +13,9 @@ import android.text.method.DigitsKeyListener
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 
-fun TextView.setCompoundXmlDrawables(@DrawableRes vararg drawables: Int) {
-    setCompoundDrawablesWithIntrinsicBounds(
-        appContext.createXmlDrawable(drawables.getOrNull(0) ?: 0),
-        appContext.createXmlDrawable(drawables.getOrNull(1) ?: 0),
-        appContext.createXmlDrawable(drawables.getOrNull(2) ?: 0),
-        appContext.createXmlDrawable(drawables.getOrNull(3) ?: 0)
-    )
+fun TextView.setCompoundXmlDrawables(@DrawableRes left: Int = 0, @DrawableRes top: Int = 0, @DrawableRes right: Int = 0, @DrawableRes bottom: Int = 0) {
+    setCompoundDrawablesWithIntrinsicBounds(appContext.createXmlDrawable(left), appContext.createXmlDrawable(top),
+        appContext.createXmlDrawable(right), appContext.createXmlDrawable(bottom))
 }
 
 @Suppress("DEPRECATION")

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
+ * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
 @file:Suppress("unused")
@@ -10,6 +10,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.view.View
+import com.google.android.material.snackbar.Snackbar
 
 val View.appContext: Context
     get() = context.applicationContext
@@ -52,3 +53,21 @@ fun View.setGone() {
         visibility = View.GONE
     }
 }
+
+fun View.snackbar(message: CharSequence) = Snackbar
+    .make(this, message, Snackbar.LENGTH_SHORT)
+    .apply { show() }
+
+fun View.longSnackbar(message: CharSequence) = Snackbar
+    .make(this, message, Snackbar.LENGTH_LONG)
+    .apply { show() }
+
+fun View.snackbar(message: CharSequence, actionText: CharSequence, action: (View) -> Unit) = Snackbar
+    .make(this, message, Snackbar.LENGTH_SHORT)
+    .setAction(actionText, action)
+    .apply { show() }
+
+fun View.longSnackbar(message: CharSequence, actionText: CharSequence, action: (View) -> Unit) = Snackbar
+    .make(this, message, Snackbar.LENGTH_LONG)
+    .setAction(actionText, action)
+    .apply { show() }
