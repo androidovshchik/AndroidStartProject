@@ -11,11 +11,6 @@
         android:name=".DebugApplication"
         tools:replace="android:name"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".screens.FAQActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"></activity>
     </application>
 
 </manifest>
