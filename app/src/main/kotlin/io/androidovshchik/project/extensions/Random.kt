@@ -17,9 +17,9 @@ const val CHARS = NUMBERS + LETTERS
 fun Random.nextInt(range: IntRange) = range.start + nextInt(range.last - range.start + 1)
 
 fun Random.nextString(range: IntRange, chars: String = CHARS): String {
-    var string = ""
+    var value = ""
     for (i in 0 until nextInt(range)) {
-        string += chars[Math.floor(Math.random() * chars.length).toInt()]
+        value += chars[Math.floor(Math.random() * chars.length).toInt()]
     }
-    return string
+    return value
 }

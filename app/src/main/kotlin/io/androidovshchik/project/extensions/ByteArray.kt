@@ -11,6 +11,6 @@ import android.graphics.BitmapFactory
 
 fun ByteArray.toBitmap(): Bitmap = BitmapFactory.decodeByteArray(this, 0, size)
 
-fun ByteArray.toHex(separator: String = "", uppercase: Boolean = true): String = joinToString(separator) {
-    String.format("%02${if (uppercase) "X" else "x"}", it)
+fun ByteArray.toHex(separator: String = ""): String = joinToString(separator) {
+    String.format("%02X", it)
 }
