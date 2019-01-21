@@ -5,10 +5,10 @@
 package androidovshchik.project.inject.module
 
 import android.content.Context
+import androidovshchik.project.BuildConfig
 import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides
-import io.androidovshchik.project.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

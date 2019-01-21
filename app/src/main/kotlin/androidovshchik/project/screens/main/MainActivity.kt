@@ -5,6 +5,7 @@
 package androidovshchik.project.screens.main
 
 import android.os.Bundle
+import androidovshchik.project.R
 import androidovshchik.project.screens.base.BaseActivity
 import dagger.android.AndroidInjection
 

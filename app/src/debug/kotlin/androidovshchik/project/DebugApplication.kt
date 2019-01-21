@@ -14,7 +14,6 @@ import androidovshchik.project.utils.DebugTree
 import com.facebook.stetho.Stetho
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItem
 import com.github.takahirom.hyperion.plugin.simpleitem.SimpleItemHyperionPlugin
-import io.androidovshchik.project.BuildConfig
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

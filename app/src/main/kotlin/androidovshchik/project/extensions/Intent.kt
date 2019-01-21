@@ -8,5 +8,6 @@ package androidovshchik.project.extensions
 
 import android.content.Context
 import android.content.Intent
+import androidovshchik.project.R
 
 fun Intent.withChooser(context: Context): Intent = Intent.createChooser(this, context.getString(R.string.choose_app))

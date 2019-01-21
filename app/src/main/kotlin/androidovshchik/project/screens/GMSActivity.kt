@@ -5,6 +5,7 @@
 package androidovshchik.project.screens
 
 import android.os.Bundle
+import androidovshchik.project.R
 import androidovshchik.project.extensions.launchAppIntent
 import androidovshchik.project.extensions.setCompoundXmlDrawables
 import androidx.appcompat.app.AppCompatActivity
