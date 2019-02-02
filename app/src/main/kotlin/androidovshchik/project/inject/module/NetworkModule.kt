@@ -6,6 +6,7 @@ package androidovshchik.project.inject.module
 
 import android.content.Context
 import androidovshchik.project.BuildConfig
+import androidovshchik.project.remote.SERVER_URL
 import androidovshchik.project.remote.ServerApi
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.readystatesoftware.chuck.ChuckInterceptor
@@ -39,7 +40,7 @@ class NetworkModule(private val context: Context) {
     @Singleton
     fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
-        .baseUrl("/")
+        .baseUrl(SERVER_URL)
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()

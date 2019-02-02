@@ -6,8 +6,6 @@
 
 package androidovshchik.project.extensions
 
-import android.graphics.Bitmap
-import android.graphics.Rect
 import android.os.Build
 import android.os.Looper
 import java.io.File
@@ -20,10 +18,6 @@ val newLine: String
 
 val isUiThread: Boolean
     get() = Looper.myLooper() == Looper.getMainLooper()
-
-fun createRect(width: Int, height: Int = width): Rect = Rect(0, 0, width, height)
-
-fun createBitmap(width: Int, height: Int = width): Bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
 
 fun isKitkat() = Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT
 

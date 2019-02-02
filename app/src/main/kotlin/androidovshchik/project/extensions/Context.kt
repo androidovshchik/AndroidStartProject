@@ -6,7 +6,6 @@
 
 package androidovshchik.project.extensions
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -41,6 +40,14 @@ val Context.windowSize: Point
 val Context.screenSize: Point
     get() = windowManager.screenSize
 
+fun Context.createSilentChannel() = notificationManager.createSilentChannel()
+
+fun Context.createNoisyChannel() = notificationManager.createNoisyChannel()
+
+fun Context.createXmlDrawable(@DrawableRes drawable: Int) = if (drawable != 0) {
+    VectorDrawableCompat.create(resources, drawable, theme)
+} else null
+
 fun Context.bgToast(message: String) = sendBroadcast(intentFor<ToastReceiver>().apply {
     putExtra(EXTRA_MESSAGE, message)
     putExtra(EXTRA_DURATION, Toast.LENGTH_SHORT)
@@ -51,27 +58,14 @@ fun Context.longBgToast(message: String) = sendBroadcast(intentFor<ToastReceiver
     putExtra(EXTRA_DURATION, Toast.LENGTH_LONG)
 })
 
-fun Context.createXmlDrawable(@DrawableRes drawable: Int) = if (drawable != 0) {
-    VectorDrawableCompat.create(resources, drawable, theme)
-} else null
-
-fun Context.createSilentChannel() = notificationManager.createSilentChannel()
-
-fun Context.createNoisyChannel() = notificationManager.createNoisyChannel()
-
 @PermissionResult
 fun Context.areGranted(vararg permissions: String): Boolean {
     for (permission in permissions) {
-        if (!isGranted(permission)) {
+        if (checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
             return false
         }
     }
     return true
-}
-
-@PermissionResult
-fun Context.isGranted(permission: String): Boolean {
-    return checkCallingOrSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
 }
 
 inline fun <reified T : Service> Context.isServiceRunning() = activityManager.isServiceRunning<T>()
@@ -121,42 +115,14 @@ inline fun <reified T : BroadcastReceiver> Context.cancelAlarm() {
     alarmManager.cancel(pendingReceiverFor<T>())
 }
 
-fun Context.openMarket() {
-    try {
-        startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=$packageName".toUri()).newTask())
-    } catch (e: ActivityNotFoundException) {
-        browse("https://play.google.com/store/apps/details?id=$packageName", true)
-    }
-}
-
-fun Context.openPublisher(name: String) {
-    try {
-        startActivity(Intent(Intent.ACTION_VIEW, "search?q=pub:$name".toUri()).newTask())
-    } catch (e: ActivityNotFoundException) {
-        browse("https://play.google.com/store/apps/dev?id=$name", true)
-    }
-}
-
 fun Context.scanFiles(vararg paths: String) {
     MediaScannerConnection.scanFile(applicationContext, paths, null, null)
 }
 
-@Suppress("DEPRECATION")
-@SuppressLint("PackageManagerGetSignatures")
-fun Context.getCertificateFingerprints(separator: String = ":", algorithm: String = "SHA"): List<String> {
-    return if (isPiePlus()) {
-        packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES).signingInfo
-            ?.let { signingInfo ->
-                if (signingInfo.hasMultipleSigners()) {
-                    signingInfo.apkContentsSigners?.map { it.hash(separator, algorithm) }
-                        ?: emptyList()
-                } else {
-                    signingInfo.signingCertificateHistory?.map { it.hash(separator, algorithm) }
-                        ?: emptyList()
-                }
-            } ?: return emptyList()
-    } else {
-        packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES).signatures
-            ?.map { it.hash(separator, algorithm) } ?: emptyList()
+fun Context.openGooglePlay() {
+    try {
+        startActivity(Intent(Intent.ACTION_VIEW, "market://details?id=$packageName".toUri()).newTask())
+    } catch (e: ActivityNotFoundException) {
+        browse("https://play.google.com/store/apps/details?id=$packageName", true)
     }
 }

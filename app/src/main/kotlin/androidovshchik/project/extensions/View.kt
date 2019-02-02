@@ -27,47 +27,52 @@ val View.parentActivity: Activity?
         return null
     }
 
-val View.isVisible: Boolean
+var View.isVisible: Boolean
     get() = visibility == View.VISIBLE
+    set(value) {
+        if (value && !isVisible) {
+            visibility = View.VISIBLE
+        }
+    }
 
-val View.isInvisible: Boolean
+var View.isInvisible: Boolean
     get() = visibility == View.INVISIBLE
+    set(value) {
+        if (value && !isInvisible) {
+            visibility = View.INVISIBLE
+        }
+    }
 
-val View.isGone: Boolean
+var View.isGone: Boolean
     get() = visibility == View.GONE
-
-fun View.setVisible() {
-    if (!isVisible) {
-        visibility = View.VISIBLE
+    set(value) {
+        if (value && !isGone) {
+            visibility = View.GONE
+        }
     }
-}
-
-fun View.setInvisible() {
-    if (!isInvisible) {
-        visibility = View.INVISIBLE
-    }
-}
-
-fun View.setGone() {
-    if (!isGone) {
-        visibility = View.GONE
-    }
-}
 
 fun View.snackbar(message: CharSequence) = Snackbar
     .make(this, message, Snackbar.LENGTH_SHORT)
-    .apply { show() }
-
-fun View.longSnackbar(message: CharSequence) = Snackbar
-    .make(this, message, Snackbar.LENGTH_LONG)
-    .apply { show() }
+    .apply {
+        show()
+    }
 
 fun View.snackbar(message: CharSequence, actionText: CharSequence, action: (View) -> Unit) = Snackbar
     .make(this, message, Snackbar.LENGTH_SHORT)
     .setAction(actionText, action)
-    .apply { show() }
+    .apply {
+        show()
+    }
+
+fun View.longSnackbar(message: CharSequence) = Snackbar
+    .make(this, message, Snackbar.LENGTH_LONG)
+    .apply {
+        show()
+    }
 
 fun View.longSnackbar(message: CharSequence, actionText: CharSequence, action: (View) -> Unit) = Snackbar
     .make(this, message, Snackbar.LENGTH_LONG)
     .setAction(actionText, action)
-    .apply { show() }
+    .apply {
+        show()
+    }
