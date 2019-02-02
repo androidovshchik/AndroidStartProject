@@ -32,11 +32,10 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == android.R.id.home) {
-            finish()
-            true
-        } else {
-            super.onOptionsItemSelected(item)
+        when (item.itemId) {
+            android.R.id.home -> finish()
+            else -> return super.onOptionsItemSelected(item)
         }
+        return true
     }
 }

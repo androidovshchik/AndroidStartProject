@@ -10,7 +10,7 @@ import androidovshchik.project.extensions.appContext
 import androidx.recyclerview.widget.RecyclerView
 
 @Suppress("UNUSED_PARAMETER", "unused")
-abstract class BaseViewHolder<T : BaseModel>(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
+abstract class BaseViewHolder<T>(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
 
     abstract fun onBindItem(item: T)
 

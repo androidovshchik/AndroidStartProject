@@ -2,7 +2,7 @@
  * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-package androidovshchik.project.utils
+package androidovshchik.project.timber
 
 import android.annotation.SuppressLint
 import android.util.Log

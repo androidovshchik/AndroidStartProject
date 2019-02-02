@@ -7,7 +7,7 @@ package androidovshchik.project.screens.base
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
-@Suppress("MemberVisibilityCanBePrivate")
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 class BasePagerAdapter(manager: FragmentManager, val fragments: ArrayList<BaseFragment> = arrayListOf()) : FragmentStatePagerAdapter(manager) {
 
     override fun getItem(position: Int): BaseFragment = fragments[position]
