@@ -6,29 +6,24 @@ package androidovshchik.project.inject.module
 
 import android.content.Context
 import androidovshchik.project.BuildConfig
+import androidovshchik.project.remote.ServerApi
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
-class AppModule(private val context: Context) {
+class NetworkModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideContext() = context
-
-    @Provides
-    @Singleton
-    fun provideCoroutineContext() = Dispatchers.Main
-
-    @Provides
-    @Singleton
-    fun provideOkHttpClient() = OkHttpClient.Builder().apply {
+    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder().apply {
         if (BuildConfig.DEBUG) {
             addInterceptor(HttpLoggingInterceptor { message ->
                 Timber.tag("NETWORK")
@@ -36,17 +31,20 @@ class AppModule(private val context: Context) {
             }.apply {
                 level = HttpLoggingInterceptor.Level.BASIC
             })
-            addInterceptor(ChuckInterceptor(context).showNotification(false))
+            addInterceptor(ChuckInterceptor(context))
         }
     }.build()
 
-    /*@Provides
+    @Provides
     @Singleton
-    fun providesRetrofitClient(okHttpClient: OkHttpClient) = Retrofit.Builder()
+    fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .client(okHttpClient)
         .baseUrl("/")
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
-        .create(Any::class.java)*/
+
+    @Provides
+    @Singleton
+    fun provideServerApi(retrofit: Retrofit): ServerApi = retrofit.create(ServerApi::class.java)
 }
