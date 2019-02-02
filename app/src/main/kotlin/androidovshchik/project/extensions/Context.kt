@@ -15,7 +15,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Point
 import android.media.MediaScannerConnection
 import android.os.SystemClock
 import android.widget.Toast
@@ -34,39 +33,14 @@ val Context.allAppPermissions: Array<String>
 val Context.launchAppIntent: Intent
     get() = packageManager.getLaunchIntentForPackage(packageName) ?: Intent()
 
-val Context.windowSize: Point
-    get() = windowManager.windowSize
+inline fun <reified T : Activity> Context.pendingActivityFor(flags: Int = PendingIntent.FLAG_UPDATE_CURRENT, vararg params: Pair<String, Any?>): PendingIntent =
+    PendingIntent.getActivity(applicationContext, 0, intentFor<T>(*params), flags)
 
-val Context.screenSize: Point
-    get() = windowManager.screenSize
+inline fun <reified T : BroadcastReceiver> Context.pendingReceiverFor(flags: Int = PendingIntent.FLAG_UPDATE_CURRENT, vararg params: Pair<String, Any?>): PendingIntent =
+    PendingIntent.getBroadcast(applicationContext, 0, intentFor<T>(*params), flags)
 
-fun Context.createSilentChannel() = notificationManager.createSilentChannel()
-
-fun Context.createNoisyChannel() = notificationManager.createNoisyChannel()
-
-fun Context.createXmlDrawable(@DrawableRes drawable: Int) = if (drawable != 0) {
-    VectorDrawableCompat.create(resources, drawable, theme)
-} else null
-
-fun Context.bgToast(message: String) = sendBroadcast(intentFor<ToastReceiver>().apply {
-    putExtra(EXTRA_MESSAGE, message)
-    putExtra(EXTRA_DURATION, Toast.LENGTH_SHORT)
-})
-
-fun Context.longBgToast(message: String) = sendBroadcast(intentFor<ToastReceiver>().apply {
-    putExtra(EXTRA_MESSAGE, message)
-    putExtra(EXTRA_DURATION, Toast.LENGTH_LONG)
-})
-
-@PermissionResult
-fun Context.areGranted(vararg permissions: String): Boolean {
-    for (permission in permissions) {
-        if (checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-            return false
-        }
-    }
-    return true
-}
+inline fun <reified T : BroadcastReceiver> Context.pendingReceiverFor(action: String, flags: Int = PendingIntent.FLAG_UPDATE_CURRENT): PendingIntent =
+    PendingIntent.getBroadcast(applicationContext, 0, Intent(action), flags)
 
 inline fun <reified T : Service> Context.isServiceRunning() = activityManager.isServiceRunning<T>()
 
@@ -92,14 +66,7 @@ inline fun <reified T : Service> Context.startForegroundService() {
     }
 }
 
-inline fun <reified T : Activity> Context.pendingActivityFor(flags: Int = PendingIntent.FLAG_UPDATE_CURRENT, vararg params: Pair<String, Any?>): PendingIntent =
-    PendingIntent.getActivity(applicationContext, 0, intentFor<T>(*params), flags)
-
-inline fun <reified T : BroadcastReceiver> Context.pendingReceiverFor(flags: Int = PendingIntent.FLAG_UPDATE_CURRENT, vararg params: Pair<String, Any?>): PendingIntent =
-    PendingIntent.getBroadcast(applicationContext, 0, intentFor<T>(*params), flags)
-
-inline fun <reified T : BroadcastReceiver> Context.pendingReceiverFor(action: String, flags: Int = PendingIntent.FLAG_UPDATE_CURRENT): PendingIntent =
-    PendingIntent.getBroadcast(applicationContext, 0, Intent(action), flags)
+inline fun <reified T : BroadcastReceiver> Context.cancelAlarm() = alarmManager.cancel(pendingReceiverFor<T>())
 
 inline fun <reified T : BroadcastReceiver> Context.createAlarm(interval: Int) {
     cancelAlarm<T>()
@@ -111,9 +78,33 @@ inline fun <reified T : BroadcastReceiver> Context.createAlarm(interval: Int) {
     }
 }
 
-inline fun <reified T : BroadcastReceiver> Context.cancelAlarm() {
-    alarmManager.cancel(pendingReceiverFor<T>())
+@PermissionResult
+fun Context.areGranted(vararg permissions: String): Boolean {
+    for (permission in permissions) {
+        if (checkCallingOrSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+            return false
+        }
+    }
+    return true
 }
+
+fun Context.bgToast(message: String) = sendBroadcast(intentFor<ToastReceiver>().apply {
+    putExtra(EXTRA_MESSAGE, message)
+    putExtra(EXTRA_DURATION, Toast.LENGTH_SHORT)
+})
+
+fun Context.longBgToast(message: String) = sendBroadcast(intentFor<ToastReceiver>().apply {
+    putExtra(EXTRA_MESSAGE, message)
+    putExtra(EXTRA_DURATION, Toast.LENGTH_LONG)
+})
+
+fun Context.createNoisyChannel() = notificationManager.createNoisyChannel()
+
+fun Context.createSilentChannel() = notificationManager.createSilentChannel()
+
+fun Context.createXmlDrawable(@DrawableRes drawable: Int) = if (drawable != 0) {
+    VectorDrawableCompat.create(resources, drawable, theme)
+} else null
 
 fun Context.scanFiles(vararg paths: String) {
     MediaScannerConnection.scanFile(applicationContext, paths, null, null)

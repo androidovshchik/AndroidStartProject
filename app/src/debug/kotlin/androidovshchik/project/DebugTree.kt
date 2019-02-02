@@ -2,7 +2,7 @@
  * Copyright (c) 2019. Vlad Kalyuzhnyu <vladkalyuzhnyu@gmail.com>
  */
 
-package androidovshchik.project.timber
+package androidovshchik.project
 
 import com.orhanobut.logger.Logger
 import timber.log.Timber
