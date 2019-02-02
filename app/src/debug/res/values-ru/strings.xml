@@ -17,5 +17,5 @@
     <string name="hr_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Запись экрана</string>
     <string name="hr_recordings" tools:ignore="ExtraTranslation,PrivateResource">Видео</string>
 
-    <string name="tmb_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Журнал логов</string>
+    <string name="tmb_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Просмотр логов</string>
 </resources>

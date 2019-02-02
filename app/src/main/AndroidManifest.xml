@@ -33,15 +33,7 @@
             android:name=".screens.GMSActivity"
             android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat"
-            android:configChanges="orientation|screenSize"></activity>
-        <receiver
-            android:name=".receivers.InstallReceiver"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
+            android:configChanges="orientation|screenSize" />
         <receiver
             android:name=".receivers.RebootReceiver"
             android:enabled="true">
@@ -54,8 +46,7 @@
         <receiver
             android:name=".receivers.ToastReceiver"
             android:enabled="true"
-            android:exported="false">
-        </receiver>
+            android:exported="false" />
     </application>
 
 </manifest>
