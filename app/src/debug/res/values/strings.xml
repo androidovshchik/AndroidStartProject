@@ -16,17 +16,4 @@
     <string name="ads_interstitial_video" translatable="false">ca-app-pub-3940256099942544/8691691433</string>
 
     <string name="hype_notification_content_title" tools:ignore="ExtraTranslation,PrivateResource">Debugging tools</string>
-
-    <string name="hype_report_title">Sending logs</string>
-    <string name="hype_report_subtitle">Share the app logs</string>
-    <string name="hype_report_logs">App logs</string>
-
-    <string name="hp_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Restart</string>
-    <string name="hp_pheonix_options_title" tools:ignore="ExtraTranslation,PrivateResource">Restart app?</string>
-    <string name="hp_restart_activity" tools:ignore="ExtraTranslation,MissingTranslation,PrivateResource">&#8230;</string>
-
-    <string name="tmb_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">Logs</string>
-    <string name="tmb_plugin_subtitle" tools:ignore="ExtraTranslation,PrivateResource">View recorded log messages</string>
-
-    <string name="hchuck_plugin_name" tools:ignore="ExtraTranslation,PrivateResource">View REST application requests</string>
 </resources>
