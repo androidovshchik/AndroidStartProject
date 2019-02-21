@@ -4,5 +4,5 @@
 </a>
 
 ```
-git clone https://github.com/androidovshchik/AndroidBlankProject.git NewProjectName
+git clone https://github.com/androidovshchik/AndroidStartProject.git NewProjectName
 ```
