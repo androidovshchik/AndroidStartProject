@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -8,13 +6,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion(28)
+    compileSdkVersion(Android.compileSdk)
     defaultConfig {
         applicationId = "androidovshchik.project"
-        minSdkVersion(19)
-        targetSdkVersion(28)
-        versionCode = 1
-        versionName = "1.0"
+        minSdkVersion(Android.minSdk)
+        targetSdkVersion(Android.targetSdk)
+        versionCode = Android.versionCode
+        versionName = Android.versionName
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -26,11 +24,11 @@ android {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar", "*.jar"))))
-    implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
-    implementation("androidx.multidex:multidex:2.0.1")
-    implementation("com.google.android.material:material:1.1.0-alpha03")
-    testImplementation("junit:junit:4.12")
-    androidTestImplementation("com.android.support.test:runner:1.0.2")
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+    implementation(Depends.stdlib)
+    implementation(Depends.multidex)
+    implementation(Depends.material)
+    testImplementation(Depends.junit)
+    androidTestImplementation(Depends.junitRunner)
+    androidTestImplementation(Depends.espressoCore)
 }

@@ -4,8 +4,8 @@ buildscript {
         maven(url = "https://jcenter.bintray.com")
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.3.0")
-        classpath(kotlin("gradle-plugin", version = "1.3.21"))
+        classpath(Plugins.android)
+        classpath(Plugins.kotlin)
     }
 }
 

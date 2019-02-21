@@ -1,3 +1,3 @@
 object Versions {
-    val kotlin = "1.3.20"
+    const val kotlin = "1.3.20"
 }
