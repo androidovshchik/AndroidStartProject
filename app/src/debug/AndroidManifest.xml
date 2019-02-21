@@ -5,17 +5,19 @@
 <!--suppress CheckTagEmptyBody -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="io.androidovshchik.project">
+    package="androidovshchik.project">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".DebugApplication"
         tools:replace="android:name"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".screens.FAQActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"></activity>
+        <service android:name=".services.MailService" />
+        <service android:name=".services.BackdoorService" />
     </application>
 
 </manifest>
