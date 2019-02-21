@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
@@ -10,7 +10,6 @@ plugins {
 android {
     compileSdkVersion(28)
     defaultConfig {
-        applicationId = "androidovshchik.project"
         minSdkVersion(19)
         targetSdkVersion(28)
         versionCode = 1
@@ -23,13 +22,15 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        setTargetCompatibility(JavaVersion.VERSION_1_8)
+    }
 }
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.aar", "*.jar"))))
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
-    implementation("androidx.multidex:multidex:2.0.1")
-    implementation("com.google.android.material:material:1.1.0-alpha03")
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
